@@ -1,10 +1,10 @@
 {
   "name": "shellcheck",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Wrapper to download shellcheck",
   "main": "index.js",
   "bin": {
-    "shellcheck": "./shellcheck-latest/shellcheck"
+    "shellcheck": "shellcheck-latest/shellcheck"
   },
   "scripts": {
     "test": "shellcheck ./postinstall.sh",
