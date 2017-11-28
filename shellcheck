@@ -1,0 +1,4 @@
+PLACEHOLDER
+
+npm tries to create a symlink for bin files before postinstall,
+thus we have this placeholder here, which gets replaced by the actual binary.
