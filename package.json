@@ -7,8 +7,8 @@
     "shellcheck": "shellcheck-latest/shellcheck"
   },
   "scripts": {
-    "test": "shellcheck ./postinstall.sh",
-    "preinstall": "./postinstall.sh"
+    "test": "shellcheck *.sh",
+    "preinstall": "./preinstall.sh"
   },
   "repository": {
     "type": "git",
