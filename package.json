@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "shellcheck *.sh",
-    "preinstall": "./preinstall.sh"
+    "preinstall": "./preinstall.sh",
+    "version": "rm -rf shellcheck-latest && mkdir shellcheck-latest && touch shellcheck-latest/shellcheck"
   },
   "repository": {
     "type": "git",
