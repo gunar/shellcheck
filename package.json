@@ -1,6 +1,6 @@
 {
   "name": "shellcheck",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Wrapper to download shellcheck",
   "main": "index.js",
   "bin": {
