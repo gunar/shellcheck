@@ -16,7 +16,7 @@ curl_get() {
 }
 
 wget_get() {
-  wget --no-config --no-verbose "$1"
+  wget -q "$1"
 }
 
 # Download
