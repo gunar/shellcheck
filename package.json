@@ -2,12 +2,9 @@
   "name": "shellcheck",
   "version": "0.2.1",
   "description": "Wrapper to download shellcheck",
-  "main": "index.js",
-  "bin": {
-    "shellcheck": "./run.sh"
-  },
+  "bin": "./run.sh",
   "scripts": {
-    "test": "shellcheck ./postinstall.sh",
+    "test": "shellcheck *.sh",
     "preinstall": "./install.sh"
   },
   "repository": {
