@@ -2,7 +2,6 @@
   "name": "shellcheck",
   "version": "0.2.1",
   "description": "Wrapper to download shellcheck",
-  "main": "index.js",
   "bin": {
     "shellcheck": "./run.sh"
   },
