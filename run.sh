@@ -1,3 +1,3 @@
 #!/bin/sh
 
-exec shellcheck-latest/shellcheck "$*"
+exec shellcheck-latest/shellcheck "$@"
