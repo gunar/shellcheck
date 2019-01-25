@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "shellcheck ./postinstall.sh",
-    "preinstall": "./postinstall.sh"
+    "preinstall": "./install.sh"
   },
   "repository": {
     "type": "git",
