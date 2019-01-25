@@ -2,9 +2,7 @@
   "name": "shellcheck",
   "version": "0.2.1",
   "description": "Wrapper to download shellcheck",
-  "bin": {
-    "shellcheck": "./run.sh"
-  },
+  "bin": "./run.sh",
   "scripts": {
     "test": "shellcheck *.sh",
     "preinstall": "./install.sh"
