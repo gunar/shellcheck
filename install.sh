@@ -12,18 +12,14 @@ http_client() {
 }
 
 curl_get() {
-  curl --disable --silent --show-error --fail --location --remote-name "$1"
+  curl --disable --silent --show-error --fail --location "$1"
 }
 
 wget_get() {
-  wget -q "$1"
+  wget -q -O - "$1"
 }
 
-# Download
-"$(http_client)_get" https://storage.googleapis.com/shellcheck/shellcheck-latest.linux.x86_64.tar.xz
+tarball_url=https://storage.googleapis.com/shellcheck/shellcheck-latest.linux.x86_64.tar.xz
 
-# Extract
-tar xf shellcheck-latest.linux.x86_64.tar.xz
-
-# Clean up
-rm shellcheck-latest.linux.x86_64.tar.xz
+# Download & Extract
+"$(http_client)_get" "$tarball_url" | tar -x -f -
