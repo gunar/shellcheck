@@ -2,10 +2,16 @@
   "name": "shellcheck",
   "version": "0.2.2",
   "description": "Wrapper to download shellcheck",
-  "bin": "./run.sh",
+  "directories": {
+    "bin": "./shellcheck-latest"
+  },
+  "files": [
+    "install.sh",
+    "shellcheck-latest"
+  ],
   "scripts": {
     "test": "shellcheck *.sh",
-    "preinstall": "./install.sh"
+    "prepare": "./install.sh"
   },
   "repository": {
     "type": "git",
