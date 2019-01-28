@@ -1,0 +1,5 @@
+/package-lock.json
+/yarn.lock
+/shellcheck-*.tgz
+
+/shellcheck-latest
