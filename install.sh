@@ -22,4 +22,4 @@ wget_get() {
 tarball_url=https://storage.googleapis.com/shellcheck/shellcheck-latest.linux.x86_64.tar.xz
 
 # Download & Extract
-"$(http_client)_get" "$tarball_url" | tar -qx -f - --include '*/shellcheck'
+"$(http_client)_get" "$tarball_url" | tar -xz
