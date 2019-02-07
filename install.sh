@@ -22,4 +22,5 @@ wget_get() {
 tarball_url=https://storage.googleapis.com/shellcheck/shellcheck-latest.linux.x86_64.tar.xz
 
 # Download & Extract
-"$(http_client)_get" "$tarball_url" | tar -xz
+tar_options=$([[ "$(tar --version)" = bsdtar* ]] && echo -xz || echo -xJ)
+"$(http_client)_get" "$tarball_url" | tar $tar_options
