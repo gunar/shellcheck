@@ -1,4 +1,6 @@
-#!/bin/sh -e
+#!/usr/bin/env bash
+
+set -e
 
 http_client() {
   for client in curl wget; do
