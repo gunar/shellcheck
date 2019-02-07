@@ -1,4 +1,6 @@
-#!/bin/sh -e
+#!/usr/bin/env bash
+
+set -e
 
 http_client() {
   for client in curl wget; do
@@ -19,7 +21,15 @@ wget_get() {
   wget -q -O - "$1"
 }
 
+tar_options() {
+  if [[ "$(tar --version)" = bsdtar* ]]; then
+    echo -xz
+  else
+    echo -xJ
+  fi
+}
+
 tarball_url=https://storage.googleapis.com/shellcheck/shellcheck-latest.linux.x86_64.tar.xz
 
 # Download & Extract
-"$(http_client)_get" "$tarball_url" | tar -xz
+"$(http_client)_get" "$tarball_url" | tar "$(tar_options)"
