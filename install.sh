@@ -31,7 +31,14 @@ tar_options() {
   fi
 }
 
-tarball_url=https://storage.googleapis.com/shellcheck/shellcheck-latest.linux.x86_64.tar.xz
+platform_filename() {
+  case "$(uname -s | tr '[:upper:]' '[:lower:]')" in
+  darwin) echo "darwin" ;;
+  *) echo "linux" ;;
+  esac
+}
+
+tarball_url=https://storage.googleapis.com/shellcheck/shellcheck-latest.$(platform_filename).x86_64.tar.xz
 
 # Download & Extract
 "$(http_client)_get" "$tarball_url" | tar "$(tar_options)"
