@@ -2,6 +2,8 @@
 
 set -e
 
+[ -z "$DEBUG" ] || { export PS4='+ [shellcheck/${BASH_SOURCE##*/}:${LINENO}] '; set -x; }
+
 http_client() {
   for client in curl wget; do
     if type "$client" >/dev/null 2>/dev/null; then
