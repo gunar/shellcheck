@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "test": "shellcheck *.sh",
-    "prepare": "./install.sh"
+    "preinstall": "./install.sh"
   },
   "repository": {
     "type": "git",
