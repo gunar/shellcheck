@@ -7,6 +7,7 @@
   },
   "files": [
     "install.sh",
+    "download.js",
     "shellcheck-latest"
   ],
   "scripts": {
