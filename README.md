@@ -1,36 +1,29 @@
-# shellcheck (a wrapper for npm)
+# shellcheck 
 
-All I've done is wrap [koalaman's shellcheck](https://www.shellcheck.net/) in a
-`package.json`.
+Linting for your bash code.
 
-## Why?
+This package downloads [koalaman's shellcheck](https://www.shellcheck.net/) from the official servers.
+And makes the binary available at `node_modules/.bin/shellcheck`.
 
-Sometimes there is no other option than to add a shell script to your node
-package.
-
-This wrapper allows you to "lint" JS and SH altogether.
-
-
-## How?
-
-Installing the package downloads the latest version of `shellcheck` from the
-official servers.
-
+## Installation
 ```sh
 npm install --dev shellcheck
 ```
 
-Now you can call `shellcheck` from your npm scripts in `package.json`.
+## Usage
+Edit `package.json` to call `shellcheck` from your npm scripts:
 
 ```json
 {
   "scripts": {
-    "lint-js": "eslint --cache --ignore-path .gitignore .",
-    "lint-sh": "shellcheck **/*.sh",
-    "lint": "lint-js && lint-sh"
+    "lint": "shellcheck '**/*.sh'"
   }
 }
 ```
+
+## Related
+
+- [hadolint](https://github.com/hadolint/hadolint): Lint Dockerfiles and the inline bash code in them
 
 ## License
 
