@@ -1,11 +1,15 @@
 {
   "name": "shellcheck",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Wrapper to download shellcheck",
   "directories": {
     "bin": "./shellcheck-latest"
   },
-  "files": ["install.sh", "download.js", "shellcheck-latest"],
+  "files": [
+    "install.sh",
+    "download.js",
+    "shellcheck-latest"
+  ],
   "scripts": {
     "test": "shellcheck *.sh",
     "preinstall": "./install.sh",
@@ -15,7 +19,10 @@
     "type": "git",
     "url": "git+https://github.com/gunar/shellcheck.git"
   },
-  "keywords": ["shellcheck", "shell"],
+  "keywords": [
+    "shellcheck",
+    "shell"
+  ],
   "author": "Gunar C. Gessner (wrapper only)",
   "license": "MIT",
   "bugs": {
