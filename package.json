@@ -5,23 +5,17 @@
   "directories": {
     "bin": "./shellcheck-latest"
   },
-  "files": [
-    "install.sh",
-    "download.js",
-    "shellcheck-latest"
-  ],
+  "files": ["install.sh", "download.js", "shellcheck-latest"],
   "scripts": {
     "test": "shellcheck *.sh",
-    "preinstall": "./install.sh"
+    "preinstall": "./install.sh",
+    "postversion": "git push --follow-tags"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gunar/shellcheck.git"
   },
-  "keywords": [
-    "shellcheck",
-    "shell"
-  ],
+  "keywords": ["shellcheck", "shell"],
   "author": "Gunar C. Gessner (wrapper only)",
   "license": "MIT",
   "bugs": {
