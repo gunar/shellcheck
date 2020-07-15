@@ -1,15 +1,14 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 set -e
 
 [ -z "$DEBUG" ] || { export PS4='+ [shellcheck/${BASH_SOURCE##*/}:${LINENO}] '; set -x; }
 
 tar_options() {
-  if [[ "$(tar --version)" = bsdtar* ]]; then
-    echo -xz
-  else
-    echo -xJ
-  fi
+  case "$(tar --version)" in
+    bsdtar*) echo -xz;;
+    *) echo -xJ;;
+  esac
 }
 
 # Download & Extract
