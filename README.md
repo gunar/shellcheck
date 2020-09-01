@@ -2,7 +2,7 @@
 
 Linting for your bash code.
 
-This package downloads [koalaman's shellcheck](https://www.shellcheck.net/) from the official servers.
+This package downloads the last version of [koalaman's shellcheck](https://www.shellcheck.net/) from the official servers.
 And makes the binary available at `node_modules/.bin/shellcheck`.
 
 ## Installation
