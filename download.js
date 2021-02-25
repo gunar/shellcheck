@@ -1,7 +1,7 @@
 const https = require('https');
 const fs = require('fs');
 
-const url = `https://github.com/koalaman/shellcheck/releases/download/latest/shellcheck-latest.${process.platform}.x86_64.tar.xz`;
+const url = `https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.${process.platform}.x86_64.tar.xz`;
 
 const isRedirect = (statusCode) => {
   return statusCode >= 300 && statusCode < 400;

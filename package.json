@@ -3,12 +3,12 @@
   "version": "0.4.4",
   "description": "Wrapper to download shellcheck",
   "directories": {
-    "bin": "./shellcheck-latest"
+    "bin": "./shellcheck-stable"
   },
   "files": [
     "install.sh",
     "download.js",
-    "shellcheck-latest"
+    "shellcheck-stable"
   ],
   "scripts": {
     "test": "shellcheck *.sh",
