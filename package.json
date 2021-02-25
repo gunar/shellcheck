@@ -1,6 +1,6 @@
 {
   "name": "shellcheck",
-  "version": "0.4.4",
+  "version": "1.0.0",
   "description": "Wrapper to download shellcheck",
   "directories": {
     "bin": "./shellcheck-stable"
