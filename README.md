@@ -7,7 +7,7 @@ And makes the binary available at `node_modules/.bin/shellcheck`.
 
 ## Installation
 ```sh
-npm install --dev shellcheck
+npm install shellcheck --save-dev
 ```
 
 ## Usage
