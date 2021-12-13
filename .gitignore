@@ -3,3 +3,6 @@
 /shellcheck-*.tgz
 
 /shellcheck-latest
+/shellcheck-stable
+
+/node_modules

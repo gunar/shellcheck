@@ -28,5 +28,8 @@
   "bugs": {
     "url": "https://github.com/gunar/shellcheck/issues"
   },
-  "homepage": "https://github.com/gunar/shellcheck#readme"
+  "homepage": "https://github.com/gunar/shellcheck#readme",
+  "dependencies": {
+    "global-agent": "^3.0.0"
+  }
 }
