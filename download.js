@@ -1,5 +1,9 @@
 const https = require('https');
-const fs = require('fs');
+const { createGlobalProxyAgent } = require('global-agent');
+
+createGlobalProxyAgent({
+  environmentVariableNamespace: ''
+});
 
 const url = `https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.${process.platform}.x86_64.tar.xz`;
 
