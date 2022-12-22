@@ -1,35 +1,103 @@
 {
   "name": "shellcheck",
-  "version": "1.1.0",
+  "version": "2.0.0",
+  "private": false,
   "description": "Wrapper to download shellcheck",
-  "directories": {
-    "bin": "./shellcheck-stable"
-  },
-  "files": [
-    "install.sh",
-    "download.js",
-    "shellcheck-stable"
+  "keywords": [
+    "bash",
+    "sh",
+    "shell",
+    "shellcheck"
   ],
-  "scripts": {
-    "test": "shellcheck *.sh",
-    "preinstall": "./install.sh",
-    "postversion": "git push --follow-tags"
+  "homepage": "https://github.com/gunar/shellcheck#readme",
+  "bugs": {
+    "url": "https://github.com/gunar/shellcheck/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gunar/shellcheck.git"
   },
-  "keywords": [
-    "shellcheck",
-    "shell"
-  ],
-  "author": "Gunar C. Gessner (wrapper only)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/gunar/shellcheck/issues"
+  "author": {
+    "name": "Gunar C. Gessner",
+    "email": "gunar@gunargessner.com",
+    "url": "http://gunargessner.com/"
   },
-  "homepage": "https://github.com/gunar/shellcheck#readme",
+  "contributors": [
+    {
+      "name": "Carlo Corradini",
+      "email": "carlo.corradini98@gmail.com",
+      "url": "https://linkedin.com/in/carlo-corradini"
+    }
+  ],
+  "bin": {
+    "shellcheck": "./bin/shellcheck.js"
+  },
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "files": [
+    "./build"
+  ],
+  "scripts": {
+    "build": "npx tsc --build tsconfig.json",
+    "check": "npx npm-run-all --npm-path npm check:*",
+    "check:format": "npx prettier --check .",
+    "check:lint": "npx eslint .",
+    "check:markdown": "npx markdownlint \"**/*.md\"",
+    "check:spell": "npx cspell lint --config cspell.json --no-progress --show-context \"**\"",
+    "check:type": "npx tsc --noEmit tsconfig.json",
+    "clean": "npx shx rm -rf build coverage",
+    "fix": "npx npm-run-all --npm-path npm fix:*",
+    "fix:format": "npx prettier --write .",
+    "fix:lint": "npx eslint --fix .",
+    "fix:markdown": "npx markdownlint --fix \"**/*.md\"",
+    "postbuild": "npx shx chmod -R 755 ./bin",
+    "prebuild": "npm run clean",
+    "prepare": "npx ts-patch install -s && npx husky install",
+    "prepublishOnly": "npm run build",
+    "test": "npx jest --verbose --coverage",
+    "test:ci": "npx jest --verbose --coverage --ci --forceExit --detectOpenHandles --runInBand",
+    "test:watch": "npx jest --watch"
+  },
+  "devDependencies": {
+    "@cspell/dict-node": "^4.0.2",
+    "@cspell/dict-npm": "^5.0.1",
+    "@cspell/dict-typescript": "^3.0.2",
+    "@cspell/eslint-plugin": "^6.18.0",
+    "@types/decompress": "^4.2.4",
+    "@types/global-agent": "^2.1.1",
+    "@types/jest": "^29.2.4",
+    "@typescript-eslint/eslint-plugin": "^5.47.0",
+    "@typescript-eslint/parser": "^5.47.0",
+    "cspell": "^6.18.0",
+    "eslint": "^8.30.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.5.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^27.1.7",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-tsdoc": "^0.2.17",
+    "husky": "^8.0.2",
+    "jest": "^29.3.1",
+    "lint-staged": "^13.1.0",
+    "markdownlint": "^0.26.2",
+    "markdownlint-cli": "^0.32.2",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.1",
+    "shx": "^0.3.4",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
+    "ts-patch": "^2.1.0",
+    "tsconfig-paths": "^4.1.1",
+    "typescript": "^4.9.3",
+    "typescript-transform-paths": "^3.4.4"
+  },
   "dependencies": {
+    "decompress": "^4.2.1",
+    "decompress-tarxz": "^3.0.0",
+    "decompress-unzip": "^4.0.1",
     "global-agent": "^3.0.0"
   }
 }
