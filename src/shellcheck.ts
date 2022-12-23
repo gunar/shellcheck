@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import 'global-agent/bootstrap';
 import fs from 'node:fs';
 import path from 'node:path';
