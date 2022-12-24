@@ -11,7 +11,6 @@ export type ShellCheckPlatformArgs = {
    */
   platform?: NodeJS.Platform;
 };
-
 /**
  * Convert platform to ShellCheck platform.
  *
@@ -19,10 +18,12 @@ export type ShellCheckPlatformArgs = {
  * @returns ShellCheck platform.
  */
 export function shellCheckPlatform(args?: ShellCheckPlatformArgs) {
-  const platform =
-    config.binaries[args?.platform ?? process.platform]?.platform;
+  const opts: Required<ShellCheckPlatformArgs> = {
+    platform: args?.platform ?? process.platform
+  };
+
+  const platform = config.binaries[opts.platform]?.platform;
 
   if (platform === undefined) throw new PlatformError();
-
   return platform;
 }

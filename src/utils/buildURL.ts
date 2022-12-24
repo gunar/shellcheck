@@ -1,12 +1,12 @@
 import process from 'node:process';
 import url from 'node:url';
-import https from 'node:https';
 import type { Release, ReleaseVersion } from '~/types';
 import { config } from '~/configs';
 import { InternalError, ReleaseError } from '~/errors';
 import { logger } from '~/logger';
 import { shellCheckPlatform } from './shellCheckPlatform';
 import { shellCheckArchitecture } from './shellCheckArchitecture';
+import { requestJSON } from './request';
 
 /**
  * Build URL arguments.
@@ -15,7 +15,7 @@ export type BuildURLArgs = {
   /**
    * Base URL.
    */
-  baseURL?: string;
+  baseURL?: url.URL;
   /**
    * Release.
    */
@@ -31,46 +31,39 @@ export type BuildURLArgs = {
 };
 
 /**
+ * Find latest release version arguments.
+ */
+type FindLatestReleaseVersionArgs = {
+  /**
+   * URL.
+   */
+  url: url.URL;
+};
+
+/**
  * Find latest release version.
  *
  * @returns Latest release version.
  */
-function findLatestReleaseVersion(): Promise<ReleaseVersion> {
-  logger.debug('Finding latest release version');
+async function findLatestReleaseVersion(
+  args?: FindLatestReleaseVersionArgs
+): Promise<ReleaseVersion> {
+  const opts: Required<FindLatestReleaseVersionArgs> = {
+    url: args?.url || config.apiURL
+  };
+  logger.debug(`Finding latest release version from ${opts.url}`);
 
-  return new Promise((resolve, reject) => {
-    https
-      .get(config.apiURL, { headers: { 'User-Agent': 'Node.js' } }, (res) => {
-        let data = '';
-
-        res.on('data', (chunk) => {
-          data += chunk;
-        });
-
-        res.on('end', () => {
-          try {
-            const dataJSON = JSON.parse(data);
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            const { tag_name: version }: { tag_name?: ReleaseVersion } =
-              dataJSON;
-
-            if (!version)
-              reject(
-                new ReleaseError(
-                  `Unable to determine latest release version because 'tag_name' is missing`
-                )
-              );
-            else {
-              logger.debug(`Latest release version is '${version}'`);
-              resolve(version);
-            }
-          } catch (err) {
-            reject(err);
-          }
-        });
-      })
-      .on('error', (err) => reject(err));
+  const data = await requestJSON<{ tag_name?: ReleaseVersion }>({
+    url: opts.url
   });
+
+  if (!data.tag_name)
+    throw new ReleaseError(
+      `Unable to determine latest release version because 'tag_name' is missing`
+    );
+
+  logger.debug(`Latest release version is '${data.tag_name}'`);
+  return data.tag_name;
 }
 
 /**
@@ -80,29 +73,29 @@ function findLatestReleaseVersion(): Promise<ReleaseVersion> {
  * @returns Download URL.
  */
 export async function buildURL(args?: BuildURLArgs): Promise<url.URL> {
-  logger.debug(`Building URL: ${JSON.stringify(args)}`);
+  const opts: Required<BuildURLArgs> = {
+    baseURL: args?.baseURL ?? config.downloadURL,
+    release:
+      !args?.release || args?.release === 'latest'
+        ? await findLatestReleaseVersion()
+        : args.release,
+    platform: args?.platform ?? process.platform,
+    architecture: args?.architecture ?? process.arch
+  };
+  logger.debug(`Building URL: ${JSON.stringify(opts)}`);
 
-  const platform = args?.platform ?? process.platform;
-  const shellcheckPlatform = shellCheckPlatform({ platform });
-  const architecture = args?.architecture ?? process.arch;
-  const shellcheckArchitecture = shellCheckArchitecture({
-    platform,
-    architecture
+  const platform = shellCheckPlatform({ platform: opts.platform });
+  const architecture = shellCheckArchitecture({
+    platform: opts.platform,
+    architecture: opts.architecture
   });
-  const archive = config.binaries[platform]?.archive;
+  const archive = config.binaries[opts.platform]?.archive;
   if (archive === undefined)
-    throw new InternalError(`No archive for platform '${platform}'`);
-  const downloadURL = args?.baseURL ?? config.downloadURL;
-  const release =
-    !args?.release || args?.release === 'latest'
-      ? await findLatestReleaseVersion()
-      : args.release;
+    throw new InternalError(`No archive for platform '${opts.platform}'`);
 
   return new url.URL(
-    `${downloadURL}/${release}/shellcheck-${release}.${
-      shellcheckPlatform !== '' ? `${shellcheckPlatform}.` : ''
-    }${
-      shellcheckArchitecture !== '' ? `${shellcheckArchitecture}.` : ''
-    }${archive}`
+    `${opts.baseURL}/${opts.release}/shellcheck-${opts.release}.${
+      platform !== '' ? `${platform}.` : ''
+    }${architecture !== '' ? `${architecture}.` : ''}${archive}`
   );
 }

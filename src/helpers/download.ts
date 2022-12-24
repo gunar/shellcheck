@@ -1,16 +1,14 @@
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
 import process from 'node:process';
 import path from 'node:path';
+import os from 'node:os';
 import type url from 'node:url';
 import decompress from 'decompress';
 import decompressTarxz from 'decompress-tarxz';
 import decompressUnzip from 'decompress-unzip';
 import { config } from '~/configs';
 import { logger } from '~/logger';
-import { mkdtemp } from './mkdtemp';
-import { buildURL } from './buildURL';
-import { binName } from './binName';
-import { downloadFile } from './downloadFile';
+import { buildURL, requestDownload } from '~/utils';
 
 /**
  * Download arguments.
@@ -41,51 +39,53 @@ export type DownloadArgs = {
  */
 export async function download(args: DownloadArgs): Promise<void> {
   let tmpDir: string | undefined;
+  const { destination } = args;
   const platform = args.platform ?? process.platform;
   const architecture = args.architecture ?? process.arch;
-  const bin = binName({ platform });
 
   try {
+    // Check destination
+    await fs.access(path.dirname(destination), fs.constants.W_OK);
+
     // Temporary directory
     logger.debug(`Creating temporary directory`);
-    tmpDir = await mkdtemp();
-    logger.debug(`Temporary directory: '${tmpDir}'`);
+    tmpDir = await fs.mkdtemp(`${os.tmpdir()}${path.sep}`);
 
     const archive = path.normalize(`${tmpDir}/shellcheck.download`);
-    const shellcheck = path.normalize(`${tmpDir}/${bin}`);
+    const shellcheck = path.normalize(`${tmpDir}/${config.bin}`);
 
     // Build URL
-    logger.debug(`Obtaining download URL`);
+    logger.debug(`Building download URL`);
     const downloadURL =
       args.url ?? (await buildURL({ platform, architecture }));
 
     // Download
     logger.info(`Downloading '${downloadURL}' to '${archive}'`);
-    await downloadFile({ url: downloadURL, destination: archive });
+    await requestDownload({ url: downloadURL, destination: archive });
 
     // Extract
     logger.info(`Extracting '${archive}' to '${path.dirname(shellcheck)}'`);
     await decompress(archive, path.dirname(shellcheck), {
       plugins: [decompressTarxz(), decompressUnzip()],
       strip: 1,
-      filter: (file) => file.path === bin
+      filter: (file) => file.path === config.bin
     });
 
     // Permissions
     logger.debug(
       `Changing permissions '${config.mode.toString(8)}' of '${shellcheck}'`
     );
-    fs.chmodSync(shellcheck, config.mode);
+    await fs.chmod(shellcheck, config.mode);
 
     // Move
     logger.info(`Moving '${shellcheck}' to '${args.destination}'`);
-    fs.renameSync(shellcheck, args.destination);
+    await fs.rename(shellcheck, args.destination);
   } finally {
     if (tmpDir) {
       try {
         logger.debug(`Removing temporary directory '${tmpDir}'`);
-        fs.rmSync(tmpDir, { recursive: true, force: true });
-      } catch (_) {
+        await fs.rm(tmpDir, { recursive: true, force: true });
+      } catch {
         /* empty */
       }
     }

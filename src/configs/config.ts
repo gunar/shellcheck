@@ -1,14 +1,21 @@
 import type fs from 'node:fs';
+import url from 'node:url';
 import type {
   NonEmptyArray,
+  Release,
   ShellCheckArchitecture,
   ShellCheckPlatform
 } from '~/types';
+import { LoggerLevel } from '~/logger/LoggerLevel';
 
 /**
  * Configuration.
  */
 export type Config = {
+  /**
+   * Binary name.
+   */
+  bin: string;
   /**
    * Access permissions.
    */
@@ -16,11 +23,15 @@ export type Config = {
   /**
    * Download URL.
    */
-  downloadURL: string;
+  downloadURL: url.URL;
   /**
    * GitHub API URL.
    */
-  apiURL: string;
+  apiURL: url.URL;
+  /**
+   * Release.
+   */
+  release: Release;
   /**
    * Supported ShellCheck binaries.
    */
@@ -45,15 +56,30 @@ export type Config = {
       }
     >
   >;
+  /**
+   * Logger.
+   */
+  logger: {
+    /**
+     * Logger level.
+     */
+    level: LoggerLevel;
+  };
 };
 
 /**
  * Configuration.
  */
 export const config: Config = {
+  bin: `shellcheck${process.platform === 'win32' ? '.exe' : ''}`,
   mode: 0o755,
-  downloadURL: `https://github.com/koalaman/shellcheck/releases/download`,
-  apiURL: `https://api.github.com/repos/koalaman/shellcheck/releases/latest`,
+  downloadURL: new url.URL(
+    `https://github.com/koalaman/shellcheck/releases/download`
+  ),
+  apiURL: new url.URL(
+    `https://api.github.com/repos/koalaman/shellcheck/releases/latest`
+  ),
+  release: 'latest',
   binaries: {
     linux: {
       platform: 'linux',
@@ -69,5 +95,6 @@ export const config: Config = {
       archive: 'tar.xz'
     },
     win32: { platform: '', architectures: [['x64', '']], archive: 'zip' }
-  }
+  },
+  logger: { level: LoggerLevel.INFO }
 };

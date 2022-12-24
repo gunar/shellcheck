@@ -1,5 +1,5 @@
+import { config } from '~/configs';
 import { Logger } from './Logger';
-import { LoggerLevel } from './LoggerLevel';
 
 export * from './Logger';
 export * from './LoggerLevel';
@@ -7,4 +7,4 @@ export * from './LoggerLevel';
 /**
  * Default logger.
  */
-export const logger = new Logger(LoggerLevel.INFO);
+export const logger = new Logger(config.logger.level);

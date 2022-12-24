@@ -1,16 +1,15 @@
 #!/usr/bin/env node
 'use strict';
 
-const app = require('../build');
-
-app
+require('../build')
   .shellcheck({ stdio: 'inherit' })
   .then((shellcheck) => {
     // Check error
     if (shellcheck.error) throw shellcheck.error;
-    // Stdout
+
+    // Print stdout
     if (shellcheck.stdout) process.stdout.write(shellcheck.stdout);
-    // Stderr
+    // Print stderr
     if (shellcheck.stderr) process.stderr.write(shellcheck.stderr);
 
     // Exit

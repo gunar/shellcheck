@@ -1,7 +1,7 @@
 /**
- * Download error.
+ * Request error.
  */
-export class DownloadError extends Error {
+export class RequestError extends Error {
   /**
    * Construct a new Error.
    *
@@ -10,6 +10,6 @@ export class DownloadError extends Error {
   constructor(message: string) {
     super(message);
 
-    Object.setPrototypeOf(this, DownloadError.prototype);
+    Object.setPrototypeOf(this, RequestError.prototype);
   }
 }
