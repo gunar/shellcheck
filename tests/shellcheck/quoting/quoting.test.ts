@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { shellcheck } from '~/index';
+import { shellcheck } from '~/shellcheck';
 
 const SCRIPT_FILE = path.normalize(`${__dirname}/quoting.sh`);
 
