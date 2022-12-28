@@ -16,6 +16,5 @@ require('../build')
     process.exit(shellcheck.status ?? 1);
   })
   .catch((err) => {
-    app.logger.error('Error spawning ShellCheck: ' + err);
     throw err;
   });

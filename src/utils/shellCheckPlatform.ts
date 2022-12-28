@@ -11,6 +11,7 @@ export type ShellCheckPlatformArgs = {
    */
   platform?: NodeJS.Platform;
 };
+
 /**
  * Convert platform to ShellCheck platform.
  *

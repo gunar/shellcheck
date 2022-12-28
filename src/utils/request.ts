@@ -74,6 +74,8 @@ export async function request<T>(args: RequestArgs<T>): Promise<T> {
               reject(new RequestError(`${err}`));
             }
           } else {
+            res.on('error', (err) => reject(new RequestError(`${err}`)));
+
             try {
               resolve(await opts.cb(res));
             } catch (err) {
@@ -112,6 +114,7 @@ export async function requestDownload(
       new Promise((resolve, reject) => {
         const fileStream = fs
           .createWriteStream(args.destination)
+          .on('error', (err) => reject(new RequestError(`${err}`)))
           .on('finish', () => {
             fileStream.close((err) => {
               if (err) reject(new RequestError(`${err}`));
@@ -140,7 +143,7 @@ export async function requestJSON<T>(args: RequestJSONArgs<T>): Promise<T> {
 
   return request({
     ...args,
-    cb: async (res) =>
+    cb: (res) =>
       new Promise((resolve, reject) => {
         let data = '';
 
