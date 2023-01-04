@@ -17,7 +17,7 @@ npm install --save-dev shellcheck
 
 > **Note**: On first execution `shellcheck` it's automatically downloaded
 
-> **Note**: It's recommended to execute `shellcheck` using [`npx`](docs.npmjs.com/cli/commands/npx)
+> **Note**: It's recommended to execute `shellcheck` using [`npx`](https://docs.npmjs.com/cli/commands/npx)
 
 Execute `shellcheck` directly from your npm scripts:
 
