@@ -42,6 +42,7 @@ export async function download(args: DownloadArgs): Promise<void> {
   const { destination } = args;
   const platform = args.platform ?? process.platform;
   const architecture = args.architecture ?? process.arch;
+  const binArchive = `shellcheck${platform === 'win32' ? '.exe' : ''}`;
 
   try {
     // Check destination
@@ -52,7 +53,7 @@ export async function download(args: DownloadArgs): Promise<void> {
     tmpDir = await fs.mkdtemp(`${os.tmpdir()}${path.sep}`);
 
     const archive = path.normalize(`${tmpDir}/shellcheck.download`);
-    const shellcheck = path.normalize(`${tmpDir}/${config.bin}`);
+    const shellcheck = path.normalize(`${tmpDir}/${binArchive}`);
 
     // Build URL
     logger.debug(`Building download URL`);
@@ -68,7 +69,7 @@ export async function download(args: DownloadArgs): Promise<void> {
     await decompress(archive, path.dirname(shellcheck), {
       plugins: [decompressTarxz(), decompressUnzip()],
       strip: 1,
-      filter: (file) => file.path === config.bin
+      filter: (file) => file.path === binArchive
     });
 
     // Permissions
@@ -78,8 +79,8 @@ export async function download(args: DownloadArgs): Promise<void> {
     await fs.chmod(shellcheck, config.mode);
 
     // Move
-    logger.info(`Moving '${shellcheck}' to '${args.destination}'`);
-    await fs.rename(shellcheck, args.destination);
+    logger.info(`Moving '${shellcheck}' to '${destination}'`);
+    await fs.rename(shellcheck, destination);
   } finally {
     if (tmpDir) {
       try {
