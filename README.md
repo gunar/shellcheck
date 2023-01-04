@@ -1,30 +1,35 @@
-# shellcheck 
+# shellcheck
 
-Linting for your bash code.
+[![ci](https://github.com/gunar/shellcheck/actions/workflows/ci.yml/badge.svg)](https://github.com/gunar/shellcheck/actions/workflows/ci.yml)
+[![codeql](https://github.com/gunar/shellcheck/actions/workflows/codeql.yml/badge.svg)](https://github.com/gunar/shellcheck/actions/workflows/codeql.yml)
 
-This package downloads the last version of [koalaman's shellcheck](https://www.shellcheck.net/) from the official servers.
-And makes the binary available at `node_modules/.bin/shellcheck`.
+[ShellCheck](https://www.shellcheck.net) - A shell script static analysis tool.
+
+Downloads the most recent version of [koalaman](https://github.com/koalaman)'s [ShellCheck](https://www.shellcheck.net).
 
 ## Installation
+
 ```sh
-npm install shellcheck --save-dev
+npm install --save-dev shellcheck
 ```
 
 ## Usage
-Edit `package.json` to call `shellcheck` from your npm scripts:
+
+> **Note**: On first execution `shellcheck` it's automatically downloaded
+
+> **Note**: It's recommended to execute `shellcheck` using [`npx`](docs.npmjs.com/cli/commands/npx)
+
+Execute `shellcheck` directly from your npm scripts:
 
 ```json
 {
   "scripts": {
-    "lint": "shellcheck '**/*.sh'"
+    "lint": "npx shellcheck script.sh"
   }
 }
 ```
 
-## Related
-
-- [hadolint](https://github.com/hadolint/hadolint): Lint Dockerfiles and the inline bash code in them
-
 ## License
 
-MIT [http://gunar.mit-license.org]()
+This project is licensed under the [MIT](https://opensource.org/licenses/MIT) License. \
+See [LICENSE](./LICENSE) file for details.
