@@ -39,6 +39,9 @@
     "./bin",
     "./build"
   ],
+  "engines": {
+    "node": ">=16.17.0 || >=v18.4.0"
+  },
   "scripts": {
     "build": "npx tsc --build tsconfig.json",
     "check": "npx npm-run-all --npm-path npm check:*",

@@ -1,4 +1,3 @@
-import { constants as fsConstants } from 'fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
@@ -48,7 +47,7 @@ export async function shellcheck(
     await fs.access(
       opts.bin,
       // eslint-disable-next-line no-bitwise
-      fsConstants.F_OK | fsConstants.W_OK | fsConstants.X_OK
+      fs.constants.F_OK | fs.constants.W_OK | fs.constants.X_OK
     );
   } catch {
     // Download ShellCheck

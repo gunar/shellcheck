@@ -1,4 +1,3 @@
-import { constants as fsConstants } from 'fs';
 import fs from 'node:fs/promises';
 import process from 'node:process';
 import path from 'node:path';
@@ -47,7 +46,7 @@ export async function download(args: DownloadArgs): Promise<void> {
 
   try {
     // Check destination
-    await fs.access(path.dirname(destination), fsConstants.W_OK);
+    await fs.access(path.dirname(destination), fs.constants.W_OK);
 
     // Temporary directory
     logger.debug(`Creating temporary directory`);
