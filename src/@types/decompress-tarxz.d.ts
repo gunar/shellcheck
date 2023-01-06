@@ -1,1 +1,1 @@
-declare module 'decompress-tarxz';
+declare module '@felipecrs/decompress-tarxz';

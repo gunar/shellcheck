@@ -5,7 +5,7 @@ import path from 'node:path';
 import os from 'node:os';
 import type url from 'node:url';
 import decompress from 'decompress';
-import decompressTarxz from 'decompress-tarxz';
+import decompressTarxz from '@felipecrs/decompress-tarxz';
 import decompressUnzip from 'decompress-unzip';
 import { config } from '~/configs';
 import { logger } from '~/logger';
