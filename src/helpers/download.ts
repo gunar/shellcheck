@@ -87,6 +87,7 @@ export async function download(args: DownloadArgs): Promise<void> {
     );
     await fs.chmod(shellcheck, config.mode);
 
+    // TODO Move instead of copy, fs.rename cause problems in Windows
     // Copy
     logger.info(`Copying '${shellcheck}' to '${destination}'`);
     await fs.copyFile(shellcheck, destination);
