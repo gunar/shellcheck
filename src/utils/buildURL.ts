@@ -17,6 +17,10 @@ export type BuildURLArgs = {
    */
   baseURL?: url.URL;
   /**
+   * Token.
+   */
+  token?: string;
+  /**
    * Release.
    */
   release?: Release;
@@ -37,7 +41,11 @@ type FindLatestReleaseVersionArgs = {
   /**
    * URL.
    */
-  url: url.URL;
+  url?: url.URL;
+  /**
+   * Token.
+   */
+  token?: string;
 };
 
 /**
@@ -48,13 +56,17 @@ type FindLatestReleaseVersionArgs = {
 async function findLatestReleaseVersion(
   args?: FindLatestReleaseVersionArgs
 ): Promise<ReleaseVersion> {
-  const opts: Required<FindLatestReleaseVersionArgs> = {
-    url: args?.url || config.apiURL
+  const opts: Required<Omit<FindLatestReleaseVersionArgs, 'token'>> & {
+    token?: string;
+  } = {
+    url: args?.url ?? config.apiURL,
+    token: args?.token
   };
   logger.debug(`Finding latest release version from ${opts.url}`);
 
   const data = await requestJSON<{ tag_name?: ReleaseVersion }>({
-    url: opts.url
+    url: opts.url,
+    token: opts.token
   });
 
   if (!data.tag_name)
@@ -73,11 +85,11 @@ async function findLatestReleaseVersion(
  * @returns Download URL.
  */
 export async function buildURL(args?: BuildURLArgs): Promise<url.URL> {
-  const opts: Required<BuildURLArgs> = {
+  const opts: Required<Omit<BuildURLArgs, 'token'>> = {
     baseURL: args?.baseURL ?? config.downloadURL,
     release:
       !args?.release || args?.release === 'latest'
-        ? await findLatestReleaseVersion()
+        ? await findLatestReleaseVersion({ token: args?.token })
         : args.release,
     platform: args?.platform ?? process.platform,
     architecture: args?.architecture ?? process.arch

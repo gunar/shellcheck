@@ -2,7 +2,7 @@
 'use strict';
 
 require('../build')
-  .shellcheck({ stdio: 'inherit' })
+  .shellcheck({ stdio: 'inherit', token: process.env.GITHUB_TOKEN })
   .then((shellcheck) => {
     // Check error
     if (shellcheck.error) throw shellcheck.error;
