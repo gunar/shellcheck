@@ -87,9 +87,9 @@ export async function download(args: DownloadArgs): Promise<void> {
     );
     await fs.chmod(shellcheck, config.mode);
 
-    // Move
-    logger.info(`Moving '${shellcheck}' to '${destination}'`);
-    await fs.rename(shellcheck, destination);
+    // Copy
+    logger.info(`Copying '${shellcheck}' to '${destination}'`);
+    await fs.copyFile(shellcheck, destination);
   } finally {
     if (tmpDir) {
       try {
