@@ -19,7 +19,7 @@ npm install --save-dev shellcheck
 
 > **Note**: It's recommended to execute `shellcheck` using [`npx`](https://docs.npmjs.com/cli/commands/npx)
 
-> **Note**: By default, all GitHub requests are anonymous. Set the environment variable `GITHUB_TOKEN` to use your own personal access token
+> **Note**: By default, all GitHub requests are anonymous. If you encounter error `403 | rate limit exceeded` (e.g., in CI), set the environment variable `GITHUB_TOKEN` to use your own personal access token
 
 Execute `shellcheck` directly from your npm scripts:
 
