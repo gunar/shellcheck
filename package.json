@@ -71,6 +71,7 @@
     "@types/decompress": "^4.2.4",
     "@types/global-agent": "^2.1.1",
     "@types/jest": "^29.2.5",
+    "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "@typescript-eslint/parser": "^5.48.0",
     "cspell": "^6.18.1",
