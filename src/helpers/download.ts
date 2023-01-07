@@ -19,6 +19,10 @@ export type DownloadArgs = {
    */
   url?: url.URL;
   /**
+   * Token.
+   */
+  token?: string;
+  /**
    * Destination path.
    */
   destination: string;
@@ -58,11 +62,16 @@ export async function download(args: DownloadArgs): Promise<void> {
     // Build URL
     logger.debug(`Building download URL`);
     const downloadURL =
-      args.url ?? (await buildURL({ platform, architecture }));
+      args.url ??
+      (await buildURL({ token: args.token, platform, architecture }));
 
     // Download
     logger.info(`Downloading '${downloadURL}' to '${archive}'`);
-    await requestDownload({ url: downloadURL, destination: archive });
+    await requestDownload({
+      url: downloadURL,
+      token: args.token,
+      destination: archive
+    });
 
     // Extract
     logger.info(`Extracting '${archive}' to '${path.dirname(shellcheck)}'`);

@@ -19,6 +19,10 @@ export type RequestArgs<T> = {
    */
   userAgent?: string;
   /**
+   * Token.
+   */
+  token?: string;
+  /**
    * Callback.
    */
   cb: (res: http.IncomingMessage) => T | Promise<T>;
@@ -31,9 +35,10 @@ export type RequestArgs<T> = {
  * @returns T.
  */
 export async function request<T>(args: RequestArgs<T>): Promise<T> {
-  const opts: Required<RequestArgs<T>> = {
+  const opts: Required<Omit<RequestArgs<T>, 'token'>> & { token?: string } = {
     url: args.url,
     userAgent: args.userAgent ?? 'Node.js',
+    token: args.token,
     cb: args.cb
   };
 
@@ -42,7 +47,12 @@ export async function request<T>(args: RequestArgs<T>): Promise<T> {
     https
       .get(
         opts.url,
-        { headers: { 'User-Agent': opts.userAgent } },
+        {
+          headers: {
+            'User-Agent': opts.userAgent,
+            ...(opts.token && { Authorization: `Bearer ${opts.token}` })
+          }
+        },
         async (res) => {
           const statusCode = res.statusCode ?? 0;
 

@@ -22,6 +22,10 @@ export type ShellCheckArgs = {
    * Stdio.
    */
   stdio?: child_process.StdioOptions;
+  /**
+   * Token.
+   */
+  token?: string;
 };
 
 /**
@@ -34,10 +38,11 @@ export type ShellCheckArgs = {
 export async function shellcheck(
   args?: ShellCheckArgs
 ): Promise<child_process.SpawnSyncReturns<Buffer>> {
-  const opts: Required<ShellCheckArgs> = {
+  const opts: Required<Omit<ShellCheckArgs, 'token'>> & { token?: string } = {
     bin: args?.bin ?? path.normalize(`${__dirname}/../bin/${config.bin}`),
     args: args?.args ?? process.argv.slice(2),
-    stdio: args?.stdio ?? 'pipe'
+    stdio: args?.stdio ?? 'pipe',
+    token: args?.token
   };
   logger.debug(`ShellCheck: ${JSON.stringify(opts)}`);
 
@@ -55,7 +60,7 @@ export async function shellcheck(
       logger.info(
         `ShellCheck binary not found or invalid, downloading to '${opts.bin}'`
       );
-      await download({ destination: opts.bin });
+      await download({ destination: opts.bin, token: opts.token });
       logger.info(`ShellCheck binary successfully downloaded to '${opts.bin}'`);
     } catch (err) {
       logger.error(
