@@ -11,7 +11,7 @@ describe('Quoting', () => {
     expect(spawn.status).not.toBe(0);
     expect(Buffer.byteLength(spawn.stdout)).not.toBe(0);
     expect(Buffer.byteLength(spawn.stderr)).toBe(0);
-    expect(spawn.stdout.toString().replace(/\n/g, '')).toEqual(`\
+    expect(spawn.stdout.toString().replace(/\r?\n/g, '')).toEqual(`\
 \
 In ${SCRIPT_FILE} line 7:\
 for f in "*.ogg"                  # Incorrectly quoted 'for' loops\
