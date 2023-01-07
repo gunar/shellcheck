@@ -39,7 +39,7 @@ export async function shellcheck(
   args?: ShellCheckArgs
 ): Promise<child_process.SpawnSyncReturns<Buffer>> {
   const opts: Required<Omit<ShellCheckArgs, 'token'>> & { token?: string } = {
-    bin: args?.bin ?? path.normalize(`${__dirname}/../bin/${config.bin}`),
+    bin: args?.bin ?? path.normalize(`${config.binDir}/${config.bin}`),
     args: args?.args ?? process.argv.slice(2),
     stdio: args?.stdio ?? 'pipe',
     token: args?.token
