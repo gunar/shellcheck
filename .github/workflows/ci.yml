@@ -17,6 +17,8 @@ jobs:
       matrix:
         platform: [ubuntu-latest, macos-latest, windows-latest]
         node-version: [16.x, 18.x]
+      fail-fast: true
+      max-parallel: 1
 
     runs-on: ${{ matrix.platform }}
     steps:
