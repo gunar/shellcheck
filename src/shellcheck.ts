@@ -42,7 +42,7 @@ export async function shellcheck(
     bin: args?.bin ?? path.normalize(`${config.binDir}/${config.bin}`),
     args: args?.args ?? process.argv.slice(2),
     stdio: args?.stdio ?? 'pipe',
-    token: args?.token
+    token: args?.token ?? process.env.GITHUB_TOKEN
   };
   logger.debug(`ShellCheck: ${JSON.stringify(opts)}`);
 

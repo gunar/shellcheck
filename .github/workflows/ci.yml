@@ -18,7 +18,6 @@ jobs:
         platform: [ubuntu-latest, macos-latest, windows-latest]
         node-version: [16.x, 18.x]
       fail-fast: true
-      max-parallel: 1
 
     runs-on: ${{ matrix.platform }}
     steps:
@@ -37,15 +36,9 @@ jobs:
       - name: Build
         run: npm run build
       - name: Test
-        if: runner.os != 'Windows'
-        run: |
-          GITHUB_TOKEN='${{ secrets.GITHUB_TOKEN }}'
-          npm run test:ci
-      - name: Test
-        if: runner.os == 'Windows'
-        run: |
-          $env:GITHUB_TOKEN = '${{ secrets.GITHUB_TOKEN }}'
-          npm run test:ci
+        run: npm run test:ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   release:
     needs: ci
