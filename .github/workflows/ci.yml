@@ -35,9 +35,15 @@ jobs:
       - name: Build
         run: npm run build
       - name: Test
-        run: npm run test:ci
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: runner.os != 'Windows'
+        run: |
+          GITHUB_TOKEN='${{ secrets.GITHUB_TOKEN }}'
+          npm run test:ci
+      - name: Test
+        if: runner.os == 'Windows'
+        run: |
+          $env:GITHUB_TOKEN = '${{ secrets.GITHUB_TOKEN }}'
+          npm run test:ci
 
   release:
     needs: ci
