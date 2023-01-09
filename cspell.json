@@ -20,7 +20,8 @@
     "postbuild",
     "shellcheck",
     "singlequote",
-    "tsdoc",
-    "tarxz"
+    "tada",
+    "tarxz",
+    "tsdoc"
   ]
 }

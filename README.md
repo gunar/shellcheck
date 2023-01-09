@@ -26,10 +26,52 @@ Execute `shellcheck` directly from your npm scripts:
 ```json
 {
   "scripts": {
-    "lint": "npx shellcheck script.sh"
+    "lint": "npx shellcheck path/to/script.sh"
   }
 }
 ```
+
+### Programmatic
+
+> **Note**: More _functions_, _utilities_, and _constants_ are available
+
+```ts
+import { shellcheck, download, config } from 'shellcheck';
+
+/**
+ * Spawn ShellCheck.
+ * Download ShellCheck if not found or invalid.
+ */
+await shellcheck({
+  // Options..
+});
+
+/**
+ * Download ShellCheck.
+ */
+await download({
+  destination: `path/to/destination/shellcheck`
+  // destination: `path/to/destination/${config.bin}` // Platform-dependent name (add .exe on Windows)
+  // Options...
+});
+```
+
+## Compatibility
+
+> **Note**: [`Platform`](https://nodejs.org/api/process.html#processplatform) and [`Architecture`](https://nodejs.org/api/process.html#processarch) follow _Node.js_ naming convention
+
+| **Platform** | **Architecture** |
+| ------------ | ---------------- |
+| `linux`      | `arm64`          |
+| `linux`      | `x64`            |
+| `darwin`     | `x64`            |
+| `win32`      | `x64`            |
+
+## Contributing
+
+I would love to see your contribution :heart:
+
+See [CONTRIBUTING](./CONTRIBUTING.md) guidelines.
 
 ## License
 

@@ -30,7 +30,7 @@ export type ShellCheckArgs = {
 
 /**
  * Spawn ShellCheck.
- * Download ShellCheck if not found.
+ * Download ShellCheck if not found or invalid.
  *
  * @param args - ShellCheck arguments.
  * @returns ShellCheck output.
