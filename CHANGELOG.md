@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [v2.0.0](https://github.com/gunar/shellcheck/releases/tag/v2.0.0) - 2023-01-09
+## [v2.0.0](https://github.com/gunar/shellcheck/releases/tag/v2.0.0) - 2023-01-10
 
 ### Added
 
