@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [v2.0.0](https://github.com/gunar/shellcheck/releases/tag/v2.0.0) - 2023-01-12
+## [v2.0.0](https://github.com/gunar/shellcheck/releases/tag/v2.0.0) - 2023-01-31
 
 ### Added
 
@@ -24,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Download `ShellCheck` binary only when calling `npx shellcheck` for the first time
+
+### Deprecated
+
+- Drop support for all _Node.js_ versions that do not match `>=18.4.0 || >=16.17.0`
 
 ### Removed
 
