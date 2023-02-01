@@ -40,7 +40,7 @@
     "./build"
   ],
   "engines": {
-    "node": ">=16.17.0 || >=v18.4.0"
+    "node": ">=18.4.0 || >=16.17.0"
   },
   "scripts": {
     "build": "npx tsc --build tsconfig.json",
