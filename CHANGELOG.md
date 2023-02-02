@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v2.1.0](https://github.com/gunar/shellcheck/releases/tag/v2.1.0) - 2023-02-02
+
+### Added
+
+- `darwin` (`arm64`) support via [Rosetta 2](https://support.apple.com/HT211861)
+
 ## [v2.0.0](https://github.com/gunar/shellcheck/releases/tag/v2.0.0) - 2023-01-31
 
 ### Added

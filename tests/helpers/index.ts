@@ -21,7 +21,7 @@ export const ARCHITECTURES_SUPPORTED: Record<
   aix: [],
   android: [],
   cygwin: [],
-  darwin: ['x64'],
+  darwin: ['x64', 'arm64'],
   freebsd: [],
   haiku: [],
   linux: ['arm64', 'x64'],
