@@ -97,7 +97,10 @@ export const config: Config = {
     },
     darwin: {
       platform: 'darwin',
-      architectures: [['x64', 'x86_64']],
+      architectures: [
+        ['x64', 'x86_64'],
+        ['arm64', 'x86_64']
+      ],
       archive: 'tar.xz'
     },
     win32: { platform: '', architectures: [['x64', '']], archive: 'zip' }
