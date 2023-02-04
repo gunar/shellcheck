@@ -1,4 +1,4 @@
 /**
  * ShellCheck platform.
  */
-export type ShellCheckPlatform = 'linux' | 'darwin' | '';
+export type ShellCheckPlatform = 'linux' | 'darwin' | 'windows';

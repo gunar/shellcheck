@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v2.2.0](https://github.com/gunar/shellcheck/releases/tag/v2.2.0) - 2023-02-04
+
+### Changed
+
+- `darwin` (`arm64`) support with native binary
+
+- Proxy address environment variable name(s) reverted to old and standard behaviour
+
+- ShellCheck binaries download from <https://github.com/vscode-shellcheck/shellcheck-binaries/releases> and no more from <https://github.com/koalaman/shellcheck/releases>
+
+### Removed
+
+- Problematic and unused decompression libraries
+
 ## [v2.1.0](https://github.com/gunar/shellcheck/releases/tag/v2.1.0) - 2023-02-02
 
 ### Added

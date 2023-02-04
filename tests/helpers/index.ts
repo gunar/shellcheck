@@ -24,7 +24,7 @@ export const ARCHITECTURES_SUPPORTED: Record<
   darwin: ['x64', 'arm64'],
   freebsd: [],
   haiku: [],
-  linux: ['arm64', 'x64'],
+  linux: ['x64', 'arm64'],
   netbsd: [],
   openbsd: [],
   sunos: [],

@@ -7,10 +7,16 @@ export class ArchitectureError extends Error {
   /**
    * Construct a new Error.
    *
-   * @param message - Error message.
+   * @param architecture - Architecture.
+   * @param platform - Platform.
    */
-  constructor(message = `Architecture '${process.arch}' is not supported`) {
-    super(message);
+  constructor(
+    architecture: NodeJS.Architecture = process.arch,
+    platform: NodeJS.Platform = process.platform
+  ) {
+    super(
+      `Architecture '${architecture}' of platform '${platform}' is not supported`
+    );
 
     Object.setPrototypeOf(this, ArchitectureError.prototype);
   }

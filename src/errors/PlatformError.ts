@@ -7,10 +7,10 @@ export class PlatformError extends Error {
   /**
    * Construct a new Error.
    *
-   * @param message - Error message.
+   * @param platform - Platform.
    */
-  constructor(message = `Platform '${process.platform}' is not supported`) {
-    super(message);
+  constructor(platform: NodeJS.Platform = process.platform) {
+    super(`Platform '${platform}' is not supported`);
 
     Object.setPrototypeOf(this, PlatformError.prototype);
   }

@@ -3,6 +3,7 @@
   "language": "en",
   "useGitignore": true,
   "import": [
+    "@cspell/dict-en_us/cspell-ext.json",
     "@cspell/dict-node/cspell-ext.json",
     "@cspell/dict-npm/cspell-ext.json",
     "@cspell/dict-typescript/cspell-ext.json"
@@ -10,18 +11,17 @@
   "ignorePaths": ["**/build/", "**/coverage/", "**/node_modules/"],
   "words": [
     "aarch64",
+    "behaviour",
     "codeql",
     "corradini",
     "cygwin",
-    "felipecrs",
-    "gunar",
     "gessner",
+    "gunar",
     "koalaman",
     "postbuild",
     "shellcheck",
     "singlequote",
     "tada",
-    "tarxz",
     "tsdoc"
   ]
 }

@@ -1,10 +1,13 @@
-import 'global-agent/bootstrap';
 import fs from 'node:fs';
 import https from 'node:https';
 import type http from 'node:http';
 import type url from 'node:url';
+import { bootstrap } from 'global-agent';
 import { RequestError } from '~/errors';
 import { logger } from '~/logger';
+
+// Proxy global agent
+bootstrap({ environmentVariableNamespace: '' });
 
 /**
  * Request arguments.

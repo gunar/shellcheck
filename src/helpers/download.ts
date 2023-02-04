@@ -4,8 +4,6 @@ import path from 'node:path';
 import os from 'node:os';
 import type url from 'node:url';
 import decompress from 'decompress';
-import decompressTarxz from '@felipecrs/decompress-tarxz';
-import decompressUnzip from 'decompress-unzip';
 import { config } from '~/configs';
 import { logger } from '~/logger';
 import { buildURL, requestDownload } from '~/utils';
@@ -76,7 +74,6 @@ export async function download(args: DownloadArgs): Promise<void> {
     // Extract
     logger.info(`Extracting '${archive}' to '${path.dirname(shellcheck)}'`);
     await decompress(archive, path.dirname(shellcheck), {
-      plugins: [decompressTarxz(), decompressUnzip()],
       strip: 1,
       filter: (file) => file.path === binArchive
     });
