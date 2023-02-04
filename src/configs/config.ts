@@ -54,10 +54,6 @@ export type Config = {
         architectures: NonEmptyArray<
           [NodeJS.Architecture, ShellCheckArchitecture]
         >;
-        /**
-         * Archive.
-         */
-        archive: 'tar.xz' | 'zip';
       }
     >
   >;
@@ -80,10 +76,10 @@ export const config: Config = {
   binDir: path.normalize(`${__dirname}/../../bin`),
   mode: 0o755,
   downloadURL: new url.URL(
-    `https://github.com/koalaman/shellcheck/releases/download`
+    `https://github.com/vscode-shellcheck/shellcheck-binaries/releases/download`
   ),
   apiURL: new url.URL(
-    `https://api.github.com/repos/koalaman/shellcheck/releases/latest`
+    `https://api.github.com/repos/vscode-shellcheck/shellcheck-binaries/releases/latest`
   ),
   release: 'latest',
   binaries: {
@@ -92,18 +88,19 @@ export const config: Config = {
       architectures: [
         ['x64', 'x86_64'],
         ['arm64', 'aarch64']
-      ],
-      archive: 'tar.xz'
+      ]
     },
     darwin: {
       platform: 'darwin',
       architectures: [
         ['x64', 'x86_64'],
-        ['arm64', 'x86_64']
-      ],
-      archive: 'tar.xz'
+        ['arm64', 'aarch64']
+      ]
     },
-    win32: { platform: '', architectures: [['x64', '']], archive: 'zip' }
+    win32: {
+      platform: 'windows',
+      architectures: [['x64', 'x86_64']]
+    }
   },
   logger: { level: LoggerLevel.INFO }
 };

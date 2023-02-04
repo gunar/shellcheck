@@ -21,6 +21,8 @@ npm install --save-dev shellcheck
 
 > **Note**: It's recommended to execute `shellcheck` using [`npx`](https://docs.npmjs.com/cli/commands/npx)
 
+> **Note**: Proxy support via `HTTP_PROXY`, `HTTPS_PROXY` and `NO_PROXY` environment variables
+
 > **Note**: By default, all GitHub requests are anonymous. If you encounter error `403 | rate limit exceeded` (e.g., in CI), set the environment variable `GITHUB_TOKEN` to use your own personal access token
 
 Execute `shellcheck` directly from your npm scripts:
@@ -62,12 +64,12 @@ await download({
 
 > **Note**: [`Platform`](https://nodejs.org/api/process.html#processplatform) and [`Architecture`](https://nodejs.org/api/process.html#processarch) follow _Node.js_ naming convention
 
-| **Platform** | **Architecture** | **Notes**                                                                                                                                                                                                                                                                                                       |
-| ------------ | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `linux`      | `arm64`          |
+| **Platform** | **Architecture** |
+| ------------ | ---------------- |
 | `linux`      | `x64`            |
+| `linux`      | `arm64`          |
 | `darwin`     | `x64`            |
-| `darwin`     | `arm64`          | [Rosetta 2](https://support.apple.com/HT211861) must be installed. There is no native binary for `darwin arm64` at the moment (see [this](https://github.com/koalaman/shellcheck/issues/2109)). As a result, the downloaded binary is for `x64`, and `Rosetta 2` translates it to operate with `Apple Silicon`. |
+| `darwin`     | `arm64`          |
 | `win32`      | `x64`            |
 
 ## Contributing

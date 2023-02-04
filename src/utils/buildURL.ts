@@ -2,7 +2,7 @@ import process from 'node:process';
 import url from 'node:url';
 import type { Release, ReleaseVersion } from '~/types';
 import { config } from '~/configs';
-import { InternalError, ReleaseError } from '~/errors';
+import { ReleaseError } from '~/errors';
 import { logger } from '~/logger';
 import { shellCheckPlatform } from './shellCheckPlatform';
 import { shellCheckArchitecture } from './shellCheckArchitecture';
@@ -32,6 +32,10 @@ export type BuildURLArgs = {
    * CPU architecture.
    */
   architecture?: NodeJS.Architecture;
+  /**
+   * Archive.
+   */
+  archive?: string;
 };
 
 /**
@@ -92,7 +96,8 @@ export async function buildURL(args?: BuildURLArgs): Promise<url.URL> {
         ? await findLatestReleaseVersion({ token: args?.token })
         : args.release,
     platform: args?.platform ?? process.platform,
-    architecture: args?.architecture ?? process.arch
+    architecture: args?.architecture ?? process.arch,
+    archive: args?.archive ?? 'tar.gz'
   };
   logger.debug(`Building URL: ${JSON.stringify(opts)}`);
 
@@ -101,13 +106,8 @@ export async function buildURL(args?: BuildURLArgs): Promise<url.URL> {
     platform: opts.platform,
     architecture: opts.architecture
   });
-  const archive = config.binaries[opts.platform]?.archive;
-  if (archive === undefined)
-    throw new InternalError(`No archive for platform '${opts.platform}'`);
 
   return new url.URL(
-    `${opts.baseURL}/${opts.release}/shellcheck-${opts.release}.${
-      platform !== '' ? `${platform}.` : ''
-    }${architecture !== '' ? `${architecture}.` : ''}${archive}`
+    `${opts.baseURL}/${opts.release}/shellcheck-${opts.release}.${platform}.${architecture}.${opts.archive}`
   );
 }

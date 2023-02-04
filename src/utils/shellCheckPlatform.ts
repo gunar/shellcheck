@@ -25,6 +25,6 @@ export function shellCheckPlatform(args?: ShellCheckPlatformArgs) {
 
   const platform = config.binaries[opts.platform]?.platform;
 
-  if (platform === undefined) throw new PlatformError();
+  if (platform === undefined) throw new PlatformError(opts.platform);
   return platform;
 }

@@ -32,6 +32,7 @@ export function shellCheckArchitecture(args?: ShellCheckArchitectureArgs) {
     (arch) => arch[0] === opts.architecture
   )?.[1];
 
-  if (architecture === undefined) throw new ArchitectureError();
+  if (architecture === undefined)
+    throw new ArchitectureError(opts.architecture, opts.platform);
   return architecture;
 }
