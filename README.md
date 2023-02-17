@@ -47,8 +47,25 @@ import { shellcheck, download, config } from 'shellcheck';
  * Download ShellCheck if not found or invalid.
  */
 await shellcheck({
-  // Options..
-});
+  args: ['path/to/script.sh', 'path/to/another/script.sh']
+  // Options...
+})
+  .then((result) => {
+    // Check error
+    if (result.error) throw result.error;
+
+    // Print stdout
+    if (result.stdout) console.log(result.stdout.toString('utf8'));
+    // Print stderr
+    if (result.stderr) console.error(result.stderr.toString('utf8'));
+
+    // Exit code
+    if (result?.status !== 0) throw new Error(`Exit code: ${result?.status}`);
+  })
+  .catch((err) => {
+    console.error(`Error: ${err}`);
+    throw err;
+  });
 
 /**
  * Download ShellCheck.
