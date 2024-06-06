@@ -1,4 +1,7 @@
+import { Narrow } from '~/utils/narrow';
 import { LoggerLevel } from './LoggerLevel';
+
+type LoggerLevelOn = Exclude<LoggerLevel, LoggerLevel.OFF>;
 
 /**
  * Logger.
@@ -7,7 +10,7 @@ export class Logger {
   /**
    * Logger level value.
    */
-  private static readonly values: Record<LoggerLevel, number> = {
+  private static readonly values: Record<LoggerLevelOn, number> = {
     debug: 1,
     info: 2,
     warn: 3,
@@ -35,6 +38,8 @@ export class Logger {
    * @param message - Message.
    */
   private log(level: LoggerLevel, message: string): void {
+    if (this.level === LoggerLevel.OFF) return;
+    Narrow<LoggerLevelOn>(level);
     if (Logger.values[level] < Logger.values[this.level]) return;
 
     // eslint-disable-next-line no-console

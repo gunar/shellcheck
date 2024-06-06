@@ -15,11 +15,13 @@
     "codeql",
     "corradini",
     "cygwin",
+    "envalid",
     "gessner",
     "gunar",
     "koalaman",
     "postbuild",
     "shellcheck",
+    "shellcheckjs",
     "singlequote",
     "tada",
     "tsdoc"

@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.0.0](https://github.com/gunar/shellcheck/releases/tag/v3.0.0) - 2024-06-06
+
+### Added
+
+- Configure release version via environment variable `SHELLCHECKJS_RELEASE`
+
+- Configure logger level via environment variable `SHELLCHECKJS_LOGGER_LEVEL`
+
+### Deprecated
+
+- Drop support for _Node.js_ versions that do not match `>=18.12.0`
+
 ## [v2.2.0](https://github.com/gunar/shellcheck/releases/tag/v2.2.0) - 2023-02-04
 
 ### Changed

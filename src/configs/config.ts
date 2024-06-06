@@ -8,6 +8,7 @@ import type {
   ShellCheckPlatform
 } from '~/types';
 import { LoggerLevel } from '~/logger/LoggerLevel';
+import { env } from './env';
 
 /**
  * Configuration.
@@ -81,7 +82,7 @@ export const config: Config = {
   apiURL: new url.URL(
     `https://api.github.com/repos/vscode-shellcheck/shellcheck-binaries/releases/latest`
   ),
-  release: 'latest',
+  release: env.SHELLCHECKJS_RELEASE,
   binaries: {
     linux: {
       platform: 'linux',
@@ -102,5 +103,5 @@ export const config: Config = {
       architectures: [['x64', 'x86_64']]
     }
   },
-  logger: { level: LoggerLevel.INFO }
+  logger: { level: env.SHELLCHECKJS_LOGGER_LEVEL }
 };
