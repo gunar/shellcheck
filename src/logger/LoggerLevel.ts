@@ -3,6 +3,11 @@
  */
 export const enum LoggerLevel {
   /**
+   * Off level.
+   * Turn off logging.
+   */
+  OFF = 'off',
+  /**
    * Debug level.
    */
   DEBUG = 'debug',

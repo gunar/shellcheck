@@ -5,6 +5,7 @@
     "EditorConfig.EditorConfig",
     "esbenp.prettier-vscode",
     "Orta.vscode-jest",
+    "GitHub.vscode-github-actions",
     "Gruntfuggly.todo-tree",
     "timonwong.shellcheck",
     "usernamehw.errorlens"

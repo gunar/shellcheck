@@ -9,7 +9,7 @@ Downloads the most recent version of [koalaman](https://github.com/koalaman)'s [
 
 ## Installation
 
-> **Warning**: Node.js version `>= 18.4.0 || >= 16.17.0` is required
+> **Warning**: Node.js version `>= 18.12.0` is required
 
 ```sh
 npm install --save-dev shellcheck
@@ -34,6 +34,13 @@ Execute `shellcheck` directly from your npm scripts:
   }
 }
 ```
+
+### Environment Variables
+
+| **Name**                    | **Values**                                                 | **Default** | **Description**                                                        |
+| :-------------------------- | :--------------------------------------------------------- | :---------- | :--------------------------------------------------------------------- |
+| `SHELLCHECKJS_RELEASE`      | `latest` \| `v(0\|[1-9]\d*)\.(0\|[1-9]\d*)\.(0\|[1-9]\d*)` | `latest`    | Release version. See <https://github.com/koalaman/shellcheck/releases> |
+| `SHELLCHECKJS_LOGGER_LEVEL` | `off` \| `debug` \| `info` \| `warn` \| `error`            | `info`      | Logger level                                                           |
 
 ### Programmatic
 
