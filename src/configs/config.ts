@@ -1,6 +1,5 @@
 import type fs from 'node:fs';
 import url from 'node:url';
-import path from 'node:path';
 import type {
   NonEmptyArray,
   Release,
@@ -15,13 +14,9 @@ import { env } from './env';
  */
 export type Config = {
   /**
-   * Binary name.
+   * Binary path.
    */
   bin: string;
-  /**
-   * Binary directory.
-   */
-  binDir: string;
   /**
    * Access permissions.
    */
@@ -73,8 +68,7 @@ export type Config = {
  * Configuration.
  */
 export const config: Config = {
-  bin: `shellcheck${process.platform === 'win32' ? '.exe' : ''}`,
-  binDir: path.normalize(`${__dirname}/../../bin`),
+  bin: env.SHELLCHECKJS_BIN,
   mode: 0o755,
   downloadURL: new url.URL(
     `https://github.com/vscode-shellcheck/shellcheck-binaries/releases/download`
