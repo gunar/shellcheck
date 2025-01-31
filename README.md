@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD033 -->
+
 # shellcheck
 
 [![ci](https://github.com/gunar/shellcheck/actions/workflows/ci.yml/badge.svg)](https://github.com/gunar/shellcheck/actions/workflows/ci.yml)
@@ -37,10 +39,11 @@ Execute `shellcheck` directly from your npm scripts:
 
 ### Environment Variables
 
-| **Name**                    | **Values**                                                 | **Default** | **Description**                                                        |
-| :-------------------------- | :--------------------------------------------------------- | :---------- | :--------------------------------------------------------------------- |
-| `SHELLCHECKJS_RELEASE`      | `latest` \| `v(0\|[1-9]\d*)\.(0\|[1-9]\d*)\.(0\|[1-9]\d*)` | `latest`    | Release version. See <https://github.com/koalaman/shellcheck/releases> |
-| `SHELLCHECKJS_LOGGER_LEVEL` | `off` \| `debug` \| `info` \| `warn` \| `error`            | `info`      | Logger level                                                           |
+| **Name**                    | **Values**                                                 | **Default**                                                                   | **Description**                                                        |
+| :-------------------------- | :--------------------------------------------------------- | :---------------------------------------------------------------------------- | :--------------------------------------------------------------------- |
+| `SHELLCHECKJS_RELEASE`      | `latest` \| `v(0\|[1-9]\d*)\.(0\|[1-9]\d*)\.(0\|[1-9]\d*)` | `latest`                                                                      | Release version. See <https://github.com/koalaman/shellcheck/releases> |
+| `SHELLCHECK_BIN`            | Any valid path to an executable binary file                | _linux_ or _darwin_: `./bin/shellcheck` <br/> _win32_: `.\bin\shellcheck.exe` | ShellCheck executable binary path                                      |
+| `SHELLCHECKJS_LOGGER_LEVEL` | `off` \| `debug` \| `info` \| `warn` \| `error`            | `info`                                                                        | Logger level                                                           |
 
 ### Programmatic
 
@@ -79,7 +82,7 @@ await shellcheck({
  */
 await download({
   destination: `path/to/destination/shellcheck`
-  // destination: `path/to/destination/${config.bin}` // Platform-dependent name (add .exe on Windows)
+  // destination: `path\\to\\destination\\shellcheck.exe` // Windows
   // Options...
 });
 ```

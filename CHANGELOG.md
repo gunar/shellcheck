@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v3.1.0](https://github.com/gunar/shellcheck/releases/tag/v3.1.0) - 2025-01-31
+
+### Added
+
+- Configure binary path via environment variable `SHELLCHECKJS_BIN`
+
+### Removed
+
+- `binDir` configuration option. Configuration `bin` now contains the complete path to the ShellCheck executable binary (including both binary directory and binary name)
+
 ## [v3.0.0](https://github.com/gunar/shellcheck/releases/tag/v3.0.0) - 2024-06-06
 
 ### Added

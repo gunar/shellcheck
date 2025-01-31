@@ -1,5 +1,4 @@
 import fs from 'node:fs/promises';
-import path from 'node:path';
 import process from 'node:process';
 import child_process from 'node:child_process';
 import { config } from '~/configs';
@@ -39,7 +38,7 @@ export async function shellcheck(
   args?: ShellCheckArgs
 ): Promise<child_process.SpawnSyncReturns<Buffer>> {
   const opts: Required<Omit<ShellCheckArgs, 'token'>> & { token?: string } = {
-    bin: args?.bin ?? path.normalize(`${config.binDir}/${config.bin}`),
+    bin: args?.bin ?? config.bin,
     args: args?.args ?? process.argv.slice(2),
     stdio: args?.stdio ?? 'pipe',
     token: args?.token ?? process.env.GITHUB_TOKEN
