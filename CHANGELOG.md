@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `buildURL` argument `archive` only accepts `tar.xz` or `zip`, not a generic `string`
 
+### Deprecated
+
+- Drop support for _Node.js_ versions that do not match `>=20.9.0`
+
 ## [v3.1.0](https://github.com/gunar/shellcheck/releases/tag/v3.1.0) - 2025-01-31
 
 ### Added

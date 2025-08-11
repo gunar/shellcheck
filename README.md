@@ -11,7 +11,7 @@ Downloads the most recent version of [koalaman](https://github.com/koalaman)'s [
 
 ## Installation
 
-> **Warning**: Node.js version `>= 18.12.0` is required
+> **Warning**: Node.js version `>= 20.9.0` is required
 
 ```sh
 npm install --save-dev shellcheck
