@@ -1,10 +1,11 @@
 import * as envalid from 'envalid';
 import path from 'node:path';
 import fs from 'node:fs';
-import type { Release } from '~/types';
-import { LoggerLevel } from '~/logger/LoggerLevel';
-import { arrayOfAll } from '~/utils/arrayOfAll';
-import { Narrow } from '~/utils/narrow';
+import url from 'node:url';
+import type { Release } from '~/types/index.js';
+import { LoggerLevel } from '~/logger/LoggerLevel.js';
+import { arrayOfAll } from '~/utils/arrayOfAll.js';
+import { Narrow } from '~/utils/narrow.js';
 
 const ENV_PREFIX = 'SHELLCHECKJS';
 
@@ -39,13 +40,13 @@ export const env = envalid.cleanEnv(process.env, {
   [`${ENV_PREFIX}_RELEASE`]: releaseValidator({
     default: 'latest',
     desc: 'Release version or latest',
-    example: '`latest` or `v0.10.0`',
+    example: '`latest` or `v0.11.0`',
     docs: 'https://github.com/koalaman/shellcheck/releases'
   }),
   [`${ENV_PREFIX}_BIN`]: binValidator({
     default: path.normalize(
       path.resolve(
-        `${__dirname}/../../bin`,
+        `${path.dirname(url.fileURLToPath(import.meta.url))}/../../bin`,
         `shellcheck${process.platform === 'win32' ? '.exe' : ''}`
       )
     ),

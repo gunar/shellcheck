@@ -1,9 +1,9 @@
 import fs from 'node:fs/promises';
 import process from 'node:process';
 import child_process from 'node:child_process';
-import { config } from '~/configs';
-import { logger } from '~/logger';
-import { download } from '~/helpers';
+import { config } from '~/configs/index.js';
+import { logger } from '~/logger/index.js';
+import { download } from '~/helpers/index.js';
 
 /**
  * ShellCheck arguments.

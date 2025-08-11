@@ -4,9 +4,13 @@ import path from 'node:path';
 import os from 'node:os';
 import type url from 'node:url';
 import decompress from 'decompress';
-import { config } from '~/configs';
-import { logger } from '~/logger';
-import { buildURL, requestDownload } from '~/utils';
+// @ts-expect-error Declaration file not available
+import decompressUnzip from '@xhmikosr/decompress-unzip';
+// @ts-expect-error Declaration file not available
+import decompressTarXz from '@felipecrs/decompress-tarxz';
+import { config } from '~/configs/index.js';
+import { logger } from '~/logger/index.js';
+import { buildURL, requestDownload } from '~/utils/index.js';
 
 /**
  * Download arguments.
@@ -75,7 +79,8 @@ export async function download(args: DownloadArgs): Promise<void> {
     logger.info(`Extracting '${archive}' to '${path.dirname(shellcheck)}'`);
     await decompress(archive, path.dirname(shellcheck), {
       strip: 1,
-      filter: (file) => file.path === binArchive
+      filter: (file) => file.path === binArchive,
+      plugins: [decompressTarXz(), decompressUnzip()]
     });
 
     // Permissions

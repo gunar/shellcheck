@@ -4,10 +4,26 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+### Added
+
+- Archive (`tar.xz` or `zip`) in configuration
+
+### Changed
+
+- **ESM-only** due to `decompress` plugins
+
+- Default configuration download URL is official <https://github.com/koalaman/shellcheck/releases/download>
+
+- Default API URL is official <https://api.github.com/repos/koalaman/shellcheck/releases/latest>
+
+- Configuration of `platform` and `architectures` accepts an empty string if the value is not available
+
+- `buildURL` argument `archive` only accepts `tar.xz` or `zip`, not a generic `string`
 
 ## [v3.1.0](https://github.com/gunar/shellcheck/releases/tag/v3.1.0) - 2025-01-31
 

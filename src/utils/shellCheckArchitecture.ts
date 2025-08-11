@@ -1,6 +1,6 @@
 import process from 'node:process';
-import { config } from '~/configs';
-import { ArchitectureError } from '~/errors';
+import { config } from '~/configs/index.js';
+import { ArchitectureError } from '~/errors/index.js';
 
 /**
  * ShellCheck Architecture arguments.
