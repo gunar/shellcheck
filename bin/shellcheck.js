@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 
-require('../build')
-  .shellcheck({ stdio: 'inherit' })
+import { shellcheck } from '../build/shellcheck.js';
+
+shellcheck({ stdio: 'inherit' })
   .then((shellcheck) => {
     // Check error
     if (shellcheck.error) throw shellcheck.error;

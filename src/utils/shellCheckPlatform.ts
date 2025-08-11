@@ -1,6 +1,6 @@
 import process from 'node:process';
-import { config } from '~/configs';
-import { PlatformError } from '~/errors';
+import { config } from '~/configs/index.js';
+import { PlatformError } from '~/errors/index.js';
 
 /**
  * ShellCheck Platform arguments.

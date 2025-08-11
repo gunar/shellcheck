@@ -41,7 +41,7 @@ jobs:
     strategy:
       matrix:
         platform: [ubuntu-latest, macos-latest, windows-latest]
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [20.x, 22.x, 24.x]
       fail-fast: true
     runs-on: ${{ matrix.platform }}
     steps:
@@ -60,7 +60,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: Test
-        run: npm run test:ci
+        run: npm run test
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

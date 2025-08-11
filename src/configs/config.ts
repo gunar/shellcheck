@@ -4,10 +4,11 @@ import type {
   NonEmptyArray,
   Release,
   ShellCheckArchitecture,
+  ShellCheckArchive,
   ShellCheckPlatform
-} from '~/types';
-import { LoggerLevel } from '~/logger/LoggerLevel';
-import { env } from './env';
+} from '~/types/index.js';
+import { LoggerLevel } from '~/logger/LoggerLevel.js';
+import { env } from './env.js';
 
 /**
  * Configuration.
@@ -43,12 +44,16 @@ export type Config = {
         /**
          * ShellCheck platform.
          */
-        platform: ShellCheckPlatform;
+        platform: ShellCheckPlatform | '';
+        /**
+         * ShellCheck archive.
+         */
+        archive: ShellCheckArchive;
         /**
          * ShellCheck architectures.
          */
         architectures: NonEmptyArray<
-          [NodeJS.Architecture, ShellCheckArchitecture]
+          [NodeJS.Architecture, ShellCheckArchitecture | '']
         >;
       }
     >
@@ -71,15 +76,16 @@ export const config: Config = {
   bin: env.SHELLCHECKJS_BIN,
   mode: 0o755,
   downloadURL: new url.URL(
-    `https://github.com/vscode-shellcheck/shellcheck-binaries/releases/download`
+    `https://github.com/koalaman/shellcheck/releases/download`
   ),
   apiURL: new url.URL(
-    `https://api.github.com/repos/vscode-shellcheck/shellcheck-binaries/releases/latest`
+    `https://api.github.com/repos/koalaman/shellcheck/releases/latest`
   ),
   release: env.SHELLCHECKJS_RELEASE,
   binaries: {
     linux: {
       platform: 'linux',
+      archive: 'tar.xz',
       architectures: [
         ['x64', 'x86_64'],
         ['arm64', 'aarch64']
@@ -87,14 +93,16 @@ export const config: Config = {
     },
     darwin: {
       platform: 'darwin',
+      archive: 'tar.xz',
       architectures: [
         ['x64', 'x86_64'],
         ['arm64', 'aarch64']
       ]
     },
     win32: {
-      platform: 'windows',
-      architectures: [['x64', 'x86_64']]
+      platform: '',
+      archive: 'zip',
+      architectures: [['x64', '']]
     }
   },
   logger: { level: env.SHELLCHECKJS_LOGGER_LEVEL }

@@ -1,12 +1,17 @@
 import process from 'node:process';
 import url from 'node:url';
-import type { Release, ReleaseVersion } from '~/types';
-import { config } from '~/configs';
-import { ReleaseError } from '~/errors';
-import { logger } from '~/logger';
-import { shellCheckPlatform } from './shellCheckPlatform';
-import { shellCheckArchitecture } from './shellCheckArchitecture';
-import { requestJSON } from './request';
+import type {
+  Release,
+  ReleaseVersion,
+  ShellCheckArchive
+} from '~/types/index.js';
+import { config } from '~/configs/index.js';
+import { ReleaseError } from '~/errors/index.js';
+import { logger } from '~/logger/index.js';
+import { shellCheckPlatform } from './shellCheckPlatform.js';
+import { shellCheckArchitecture } from './shellCheckArchitecture.js';
+import { requestJSON } from './request.js';
+import { shellCheckArchive } from './shellCheckArchive.js';
 
 /**
  * Build URL arguments.
@@ -35,7 +40,7 @@ export type BuildURLArgs = {
   /**
    * Archive.
    */
-  archive?: string;
+  archive?: ShellCheckArchive;
 };
 
 /**
@@ -89,7 +94,8 @@ async function findLatestReleaseVersion(
  * @returns Download URL.
  */
 export async function buildURL(args?: BuildURLArgs): Promise<url.URL> {
-  const opts: Required<Omit<BuildURLArgs, 'token'>> = {
+  const opts: Required<Omit<BuildURLArgs, 'token' | 'archive'>> &
+    Pick<BuildURLArgs, 'archive'> = {
     baseURL: args?.baseURL ?? config.downloadURL,
     release:
       !args?.release || args?.release === 'latest'
@@ -97,7 +103,7 @@ export async function buildURL(args?: BuildURLArgs): Promise<url.URL> {
         : args.release,
     platform: args?.platform ?? process.platform,
     architecture: args?.architecture ?? process.arch,
-    archive: args?.archive ?? 'tar.gz'
+    archive: args?.archive
   };
   logger.debug(`Building URL: ${JSON.stringify(opts)}`);
 
@@ -106,8 +112,10 @@ export async function buildURL(args?: BuildURLArgs): Promise<url.URL> {
     platform: opts.platform,
     architecture: opts.architecture
   });
+  const archive =
+    opts.archive ?? shellCheckArchive({ platform: opts.platform });
 
   return new url.URL(
-    `${opts.baseURL}/${opts.release}/shellcheck-${opts.release}.${platform}.${architecture}.${opts.archive}`
+    `${opts.baseURL}/${opts.release}/shellcheck-${opts.release}${platform !== '' ? `.${platform}` : ''}${architecture !== '' ? `.${architecture}` : ''}.${archive}`
   );
 }

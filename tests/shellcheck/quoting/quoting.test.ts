@@ -1,7 +1,10 @@
 import path from 'node:path';
-import { shellcheck } from '~/shellcheck';
+import url from 'node:url';
+import { shellcheck } from '../../../src/shellcheck.js';
 
-const SCRIPT_FILE = path.normalize(`${__dirname}/quoting.sh`);
+const SCRIPT_FILE = path.normalize(
+  `${path.dirname(url.fileURLToPath(import.meta.url))}/quoting.sh`
+);
 
 describe('Quoting', () => {
   it('should fail ShellCheck checks', async () => {
@@ -9,8 +12,8 @@ describe('Quoting', () => {
 
     expect(spawn.error).toBeUndefined();
     expect(spawn.status).not.toBe(0);
-    expect(Buffer.byteLength(spawn.stdout)).not.toBe(0);
-    expect(Buffer.byteLength(spawn.stderr)).toBe(0);
+    expect(Buffer.byteLength(spawn.stdout as Uint8Array)).not.toBe(0);
+    expect(Buffer.byteLength(spawn.stderr as Uint8Array)).toBe(0);
     expect(spawn.stdout.toString().replace(/\r?\n/g, '')).toEqual(`\
 \
 In ${SCRIPT_FILE} line 7:\

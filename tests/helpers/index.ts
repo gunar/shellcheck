@@ -1,4 +1,4 @@
-import { arrayOfAll } from '~/utils';
+import { arrayOfAll } from '~/utils/index.js';
 
 export const ARCHITECTURES: Array<NodeJS.Architecture> =
   arrayOfAll<NodeJS.Architecture>()([

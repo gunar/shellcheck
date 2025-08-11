@@ -1,5 +1,5 @@
-import { Narrow } from '~/utils/narrow';
-import { LoggerLevel } from './LoggerLevel';
+import { Narrow } from '~/utils/narrow.js';
+import { LoggerLevel } from './LoggerLevel.js';
 
 type LoggerLevelOn = Exclude<LoggerLevel, LoggerLevel.OFF>;
 

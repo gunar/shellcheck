@@ -1,8 +1,7 @@
 {
   "root": true,
   "env": {
-    "node": true,
-    "jest/globals": true
+    "node": true
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -26,7 +25,7 @@
     "@typescript-eslint",
     "eslint-plugin-tsdoc",
     "prettier",
-    "jest"
+    "@vitest"
   ],
   "extends": [
     "airbnb-base",
@@ -38,7 +37,7 @@
     "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:prettier/recommended",
-    "plugin:jest/recommended"
+    "plugin:@vitest/legacy-recommended"
   ],
   "rules": {
     "prettier/prettier": "error",

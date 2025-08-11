@@ -1,9 +1,9 @@
-import { shellCheckArchitecture } from '~/utils';
-import { ArchitectureError } from '~/errors';
+import { shellCheckArchitecture } from '~/utils/index.js';
+import { ArchitectureError } from '~/errors/index.js';
 import {
   ARCHITECTURES_SUPPORTED,
   ARCHITECTURES_NOT_SUPPORTED
-} from '../helpers';
+} from '../helpers/index.js';
 
 describe('Architecture', () => {
   it.each(

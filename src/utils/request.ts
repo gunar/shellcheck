@@ -3,8 +3,8 @@ import https from 'node:https';
 import type http from 'node:http';
 import type url from 'node:url';
 import { bootstrap } from 'global-agent';
-import { RequestError } from '~/errors';
-import { logger } from '~/logger';
+import { RequestError } from '~/errors/index.js';
+import { logger } from '~/logger/index.js';
 
 // Proxy global agent
 bootstrap({ environmentVariableNamespace: '' });

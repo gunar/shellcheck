@@ -1,8 +1,8 @@
-import { config } from '~/configs';
-import { Logger } from './Logger';
+import { config } from '~/configs/index.js';
+import { Logger } from './Logger.js';
 
-export * from './Logger';
-export * from './LoggerLevel';
+export * from './Logger.js';
+export * from './LoggerLevel.js';
 
 /**
  * Default logger.
