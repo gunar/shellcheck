@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v4.1.0](https://github.com/gunar/shellcheck/releases/tag/v4.1.0) - 2025-08-12
+
+### Added
+
+- Support platform `linux` architecture `riscv64`
+
 ## [v4.0.0](https://github.com/gunar/shellcheck/releases/tag/v4.0.0) - 2025-08-12
 
 ### Added

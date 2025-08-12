@@ -22,6 +22,7 @@
     "koalaman",
     "postbuild",
     "packagejson",
+    "riscv64",
     "shellcheck",
     "shellcheckjs",
     "singlequote",
