@@ -84,7 +84,7 @@ jobs:
         run: npm run build
       - name: Build Changelog
         id: changelog
-        uses: mikepenz/release-changelog-builder-action@v2
+        uses: mikepenz/release-changelog-builder-action@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           configuration: './.github/configs/changelog.json'
