@@ -12,10 +12,10 @@ export class ArchitectureError extends Error {
    */
   constructor(
     architecture: NodeJS.Architecture = process.arch,
-    platform: NodeJS.Platform = process.platform
+    platform: NodeJS.Platform = process.platform,
   ) {
     super(
-      `Architecture '${architecture}' of platform '${platform}' is not supported`
+      `Architecture '${architecture}' of platform '${platform}' is not supported`,
     );
 
     Object.setPrototypeOf(this, ArchitectureError.prototype);

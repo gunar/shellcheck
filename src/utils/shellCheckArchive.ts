@@ -20,7 +20,7 @@ export type ShellCheckArchiveArgs = {
  */
 export function shellCheckArchive(args?: ShellCheckArchiveArgs) {
   const opts: Required<ShellCheckArchiveArgs> = {
-    platform: args?.platform ?? process.platform
+    platform: args?.platform ?? process.platform,
   };
 
   const archive = config.binaries[opts.platform]?.archive;

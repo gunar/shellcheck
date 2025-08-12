@@ -7,11 +7,11 @@ export default defineConfig({
     setupFiles: ['./tests/vitest.setup.ts'],
     typecheck: {
       enabled: true,
-      tsconfig: './tests/tsconfig.json'
+      tsconfig: './tests/tsconfig.json',
     },
     coverage: {
-      include: ['**/src/**/*.?(c|m)[jt]s?(x)']
-    }
+      include: ['**/src/**/*.?(c|m)[jt]s?(x)'],
+    },
   },
-  plugins: [tsconfigPaths()]
+  plugins: [tsconfigPaths()],
 });

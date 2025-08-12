@@ -3,7 +3,7 @@ import url from 'node:url';
 import { shellcheck } from '../../../src/shellcheck.js';
 
 const SCRIPT_FILE = path.normalize(
-  `${path.dirname(url.fileURLToPath(import.meta.url))}/quoting.sh`
+  `${path.dirname(url.fileURLToPath(import.meta.url))}/quoting.sh`,
 );
 
 describe('Quoting', () => {

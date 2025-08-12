@@ -25,11 +25,11 @@ export type ShellCheckArchitectureArgs = {
 export function shellCheckArchitecture(args?: ShellCheckArchitectureArgs) {
   const opts: Required<ShellCheckArchitectureArgs> = {
     architecture: args?.architecture ?? process.arch,
-    platform: args?.platform ?? process.platform
+    platform: args?.platform ?? process.platform,
   };
 
   const architecture = config.binaries[opts.platform]?.architectures.find(
-    (arch) => arch[0] === opts.architecture
+    arch => arch[0] === opts.architecture,
   )?.[1];
 
   if (architecture === undefined)

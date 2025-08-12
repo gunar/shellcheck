@@ -5,7 +5,7 @@ import type {
   Release,
   ShellCheckArchitecture,
   ShellCheckArchive,
-  ShellCheckPlatform
+  ShellCheckPlatform,
 } from '~/types/index.js';
 import { LoggerLevel } from '~/logger/LoggerLevel.js';
 import { env } from './env.js';
@@ -76,10 +76,10 @@ export const config: Config = {
   bin: env.SHELLCHECKJS_BIN,
   mode: 0o755,
   downloadURL: new url.URL(
-    `https://github.com/koalaman/shellcheck/releases/download`
+    `https://github.com/koalaman/shellcheck/releases/download`,
   ),
   apiURL: new url.URL(
-    `https://api.github.com/repos/koalaman/shellcheck/releases/latest`
+    `https://api.github.com/repos/koalaman/shellcheck/releases/latest`,
   ),
   release: env.SHELLCHECKJS_RELEASE,
   binaries: {
@@ -88,22 +88,22 @@ export const config: Config = {
       archive: 'tar.xz',
       architectures: [
         ['x64', 'x86_64'],
-        ['arm64', 'aarch64']
-      ]
+        ['arm64', 'aarch64'],
+      ],
     },
     darwin: {
       platform: 'darwin',
       archive: 'tar.xz',
       architectures: [
         ['x64', 'x86_64'],
-        ['arm64', 'aarch64']
-      ]
+        ['arm64', 'aarch64'],
+      ],
     },
     win32: {
       platform: '',
       archive: 'zip',
-      architectures: [['x64', '']]
-    }
+      architectures: [['x64', '']],
+    },
   },
-  logger: { level: env.SHELLCHECKJS_LOGGER_LEVEL }
+  logger: { level: env.SHELLCHECKJS_LOGGER_LEVEL },
 };

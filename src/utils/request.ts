@@ -42,7 +42,7 @@ export async function request<T>(args: RequestArgs<T>): Promise<T> {
     url: args.url,
     userAgent: args.userAgent ?? 'Node.js',
     token: args.token,
-    cb: args.cb
+    cb: args.cb,
   };
 
   logger.debug(`Request: ${JSON.stringify(opts)}`);
@@ -53,10 +53,10 @@ export async function request<T>(args: RequestArgs<T>): Promise<T> {
         {
           headers: {
             'User-Agent': opts.userAgent,
-            ...(opts.token && { Authorization: `Bearer ${opts.token}` })
-          }
+            ...(opts.token && { Authorization: `Bearer ${opts.token}` }),
+          },
         },
-        async (res) => {
+        async res => {
           const statusCode = res.statusCode ?? 0;
 
           if (statusCode >= 400) {
@@ -64,8 +64,8 @@ export async function request<T>(args: RequestArgs<T>): Promise<T> {
               new RequestError(
                 `Status code '${statusCode}' and message '${
                   res.statusMessage ?? ''
-                }'`
-              )
+                }'`,
+              ),
             );
           } else if (
             statusCode >= 300 &&
@@ -75,19 +75,19 @@ export async function request<T>(args: RequestArgs<T>): Promise<T> {
             // Redirect
             try {
               logger.debug(
-                `Redirect from '${opts.url}' to '${res.headers.location}'`
+                `Redirect from '${opts.url}' to '${res.headers.location}'`,
               );
               resolve(
                 await request({
                   ...opts,
-                  url: new URL(res.headers.location)
-                })
+                  url: new URL(res.headers.location),
+                }),
               );
             } catch (err) {
               reject(new RequestError(`${err}`));
             }
           } else {
-            res.on('error', (err) => reject(new RequestError(`${err}`)));
+            res.on('error', err => reject(new RequestError(`${err}`)));
 
             try {
               resolve(await opts.cb(res));
@@ -95,9 +95,9 @@ export async function request<T>(args: RequestArgs<T>): Promise<T> {
               reject(new RequestError(`${err}`));
             }
           }
-        }
+        },
       )
-      .on('error', (err) => reject(new RequestError(`${err}`)));
+      .on('error', err => reject(new RequestError(`${err}`)));
   });
 }
 
@@ -117,26 +117,26 @@ export type RequestDownloadArgs = Omit<RequestArgs<void>, 'cb'> & {
  * @param args - Arguments.
  */
 export async function requestDownload(
-  args: RequestDownloadArgs
+  args: RequestDownloadArgs,
 ): Promise<void> {
   logger.debug(`Request download: ${JSON.stringify(args)}`);
 
   return request({
     ...args,
-    cb: (res) =>
+    cb: res =>
       new Promise((resolve, reject) => {
         const fileStream = fs
           .createWriteStream(args.destination)
-          .on('error', (err) => reject(new RequestError(`${err}`)))
+          .on('error', err => reject(new RequestError(`${err}`)))
           .on('finish', () => {
-            fileStream.close((err) => {
+            fileStream.close(err => {
               if (err) reject(new RequestError(`${err}`));
               else resolve();
             });
           });
 
         res.pipe(fileStream);
-      })
+      }),
   });
 }
 
@@ -156,11 +156,11 @@ export async function requestJSON<T>(args: RequestJSONArgs<T>): Promise<T> {
 
   return request({
     ...args,
-    cb: (res) =>
+    cb: res =>
       new Promise((resolve, reject) => {
         let data = '';
 
-        res.on('data', (chunk) => {
+        res.on('data', chunk => {
           data += chunk;
         });
 
@@ -171,6 +171,6 @@ export async function requestJSON<T>(args: RequestJSONArgs<T>): Promise<T> {
             reject(new RequestError(`${err}`));
           }
         });
-      })
+      }),
   });
 }

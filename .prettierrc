@@ -1,7 +1,8 @@
 {
-  "endOfLine": "lf",
-  "printWidth": 80,
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
   "semi": true,
   "singleQuote": true,
-  "trailingComma": "none"
+  "trailingComma": "all",
+  "plugins": ["prettier-plugin-packagejson"]
 }

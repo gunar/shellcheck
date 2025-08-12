@@ -35,13 +35,13 @@ export type ShellCheckArgs = {
  * @returns ShellCheck output.
  */
 export async function shellcheck(
-  args?: ShellCheckArgs
+  args?: ShellCheckArgs,
 ): Promise<child_process.SpawnSyncReturns<Buffer>> {
   const opts: Required<Omit<ShellCheckArgs, 'token'>> & { token?: string } = {
     bin: args?.bin ?? config.bin,
     args: args?.args ?? process.argv.slice(2),
     stdio: args?.stdio ?? 'pipe',
-    token: args?.token ?? process.env.GITHUB_TOKEN
+    token: args?.token ?? process.env.GITHUB_TOKEN,
   };
   logger.debug(`ShellCheck: ${JSON.stringify(opts)}`);
 
@@ -51,19 +51,19 @@ export async function shellcheck(
     await fs.access(
       opts.bin,
       // eslint-disable-next-line no-bitwise
-      fs.constants.F_OK | fs.constants.W_OK | fs.constants.X_OK
+      fs.constants.F_OK | fs.constants.W_OK | fs.constants.X_OK,
     );
   } catch {
     // Download ShellCheck
     try {
       logger.info(
-        `ShellCheck binary not found or invalid, downloading to '${opts.bin}'`
+        `ShellCheck binary not found or invalid, downloading to '${opts.bin}'`,
       );
       await download({ destination: opts.bin, token: opts.token });
       logger.info(`ShellCheck binary successfully downloaded to '${opts.bin}'`);
     } catch (err) {
       logger.error(
-        `Error downloading ShellCheck binary to '${opts.bin}': ${err}`
+        `Error downloading ShellCheck binary to '${opts.bin}': ${err}`,
       );
       throw err;
     }
@@ -71,7 +71,7 @@ export async function shellcheck(
 
   // Spawn ShellCheck
   logger.debug(
-    `ShellCheck spawning binary '${opts.bin}' with arguments '${opts.args}'`
+    `ShellCheck spawning binary '${opts.bin}' with arguments '${opts.args}'`,
   );
   return child_process.spawnSync(opts.bin, opts.args, { stdio: opts.stdio });
 }

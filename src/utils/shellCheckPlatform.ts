@@ -20,7 +20,7 @@ export type ShellCheckPlatformArgs = {
  */
 export function shellCheckPlatform(args?: ShellCheckPlatformArgs) {
   const opts: Required<ShellCheckPlatformArgs> = {
-    platform: args?.platform ?? process.platform
+    platform: args?.platform ?? process.platform,
   };
 
   const platform = config.binaries[opts.platform]?.platform;

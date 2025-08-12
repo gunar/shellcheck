@@ -3,7 +3,7 @@ import url from 'node:url';
 import type {
   Release,
   ReleaseVersion,
-  ShellCheckArchive
+  ShellCheckArchive,
 } from '~/types/index.js';
 import { config } from '~/configs/index.js';
 import { ReleaseError } from '~/errors/index.js';
@@ -63,24 +63,24 @@ type FindLatestReleaseVersionArgs = {
  * @returns Latest release version.
  */
 async function findLatestReleaseVersion(
-  args?: FindLatestReleaseVersionArgs
+  args?: FindLatestReleaseVersionArgs,
 ): Promise<ReleaseVersion> {
   const opts: Required<Omit<FindLatestReleaseVersionArgs, 'token'>> & {
     token?: string;
   } = {
     url: args?.url ?? config.apiURL,
-    token: args?.token
+    token: args?.token,
   };
   logger.debug(`Finding latest release version from ${opts.url}`);
 
   const data = await requestJSON<{ tag_name?: ReleaseVersion }>({
     url: opts.url,
-    token: opts.token
+    token: opts.token,
   });
 
   if (!data.tag_name)
     throw new ReleaseError(
-      `Unable to determine latest release version because 'tag_name' is missing`
+      `Unable to determine latest release version because 'tag_name' is missing`,
     );
 
   logger.debug(`Latest release version is '${data.tag_name}'`);
@@ -103,19 +103,19 @@ export async function buildURL(args?: BuildURLArgs): Promise<url.URL> {
         : args.release,
     platform: args?.platform ?? process.platform,
     architecture: args?.architecture ?? process.arch,
-    archive: args?.archive
+    archive: args?.archive,
   };
   logger.debug(`Building URL: ${JSON.stringify(opts)}`);
 
   const platform = shellCheckPlatform({ platform: opts.platform });
   const architecture = shellCheckArchitecture({
     platform: opts.platform,
-    architecture: opts.architecture
+    architecture: opts.architecture,
   });
   const archive =
     opts.archive ?? shellCheckArchive({ platform: opts.platform });
 
   return new url.URL(
-    `${opts.baseURL}/${opts.release}/shellcheck-${opts.release}${platform !== '' ? `.${platform}` : ''}${architecture !== '' ? `.${architecture}` : ''}.${archive}`
+    `${opts.baseURL}/${opts.release}/shellcheck-${opts.release}${platform !== '' ? `.${platform}` : ''}${architecture !== '' ? `.${architecture}` : ''}.${archive}`,
   );
 }

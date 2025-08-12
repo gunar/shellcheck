@@ -25,11 +25,11 @@ const binValidator = envalid.makeValidator<string>((input: string) => {
     fs.accessSync(
       input,
       // eslint-disable-next-line no-bitwise
-      fs.constants.F_OK | fs.constants.W_OK | fs.constants.X_OK
+      fs.constants.F_OK | fs.constants.W_OK | fs.constants.X_OK,
     );
   } catch (err: unknown) {
     throw new envalid.EnvError(
-      `Invalid ShellCheck binary: ${err instanceof Error ? err.message : err}`
+      `Invalid ShellCheck binary: ${err instanceof Error ? err.message : err}`,
     );
   }
 
@@ -41,17 +41,17 @@ export const env = envalid.cleanEnv(process.env, {
     default: 'latest',
     desc: 'Release version or latest',
     example: '`latest` or `v0.11.0`',
-    docs: 'https://github.com/koalaman/shellcheck/releases'
+    docs: 'https://github.com/koalaman/shellcheck/releases',
   }),
   [`${ENV_PREFIX}_BIN`]: binValidator({
     default: path.normalize(
       path.resolve(
         `${path.dirname(url.fileURLToPath(import.meta.url))}/../../bin`,
-        `shellcheck${process.platform === 'win32' ? '.exe' : ''}`
-      )
+        `shellcheck${process.platform === 'win32' ? '.exe' : ''}`,
+      ),
     ),
     desc: 'ShellCheck binary path',
-    example: '`/path/to/shellcheck` or `C:\\path\\to\\shellcheck.exe`'
+    example: '`/path/to/shellcheck` or `C:\\path\\to\\shellcheck.exe`',
   }),
   [`${ENV_PREFIX}_LOGGER_LEVEL`]: envalid.str<LoggerLevel>({
     default: LoggerLevel.INFO,
@@ -60,9 +60,9 @@ export const env = envalid.cleanEnv(process.env, {
       LoggerLevel.DEBUG,
       LoggerLevel.INFO,
       LoggerLevel.WARN,
-      LoggerLevel.ERROR
+      LoggerLevel.ERROR,
     ]),
     desc: 'Logger level',
-    example: '`info`'
-  })
+    example: '`info`',
+  }),
 });

@@ -21,6 +21,7 @@
     "gunar",
     "koalaman",
     "postbuild",
+    "packagejson",
     "shellcheck",
     "shellcheckjs",
     "singlequote",

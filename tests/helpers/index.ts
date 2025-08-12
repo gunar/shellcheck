@@ -11,7 +11,7 @@ export const ARCHITECTURES: Array<NodeJS.Architecture> =
     'ppc64',
     's390',
     's390x',
-    'x64'
+    'x64',
   ]);
 
 export const ARCHITECTURES_SUPPORTED: Record<
@@ -28,7 +28,7 @@ export const ARCHITECTURES_SUPPORTED: Record<
   netbsd: [],
   openbsd: [],
   sunos: [],
-  win32: ['x64']
+  win32: ['x64'],
 };
 
 export const ARCHITECTURES_NOT_SUPPORTED: Record<
@@ -37,10 +37,8 @@ export const ARCHITECTURES_NOT_SUPPORTED: Record<
 > = Object.fromEntries(
   Object.entries(ARCHITECTURES_SUPPORTED).map(([platform, architectures]) => [
     platform,
-    ARCHITECTURES.filter(
-      (architecture) => !architectures.includes(architecture)
-    )
-  ])
+    ARCHITECTURES.filter(architecture => !architectures.includes(architecture)),
+  ]),
 ) as Record<NodeJS.Platform, Array<NodeJS.Architecture>>;
 
 export const PLATFORMS: Array<NodeJS.Platform> = arrayOfAll<NodeJS.Platform>()([
@@ -54,17 +52,17 @@ export const PLATFORMS: Array<NodeJS.Platform> = arrayOfAll<NodeJS.Platform>()([
   'sunos',
   'win32',
   'cygwin',
-  'netbsd'
+  'netbsd',
 ]);
 
 export const PLATFORMS_SUPPORTED: Array<NodeJS.Platform> = Object.entries(
-  ARCHITECTURES_SUPPORTED
+  ARCHITECTURES_SUPPORTED,
 )
   .filter(([, architectures]) => architectures.length > 0)
   .map(([platform]) => platform as NodeJS.Platform);
 
 export const PLATFORMS_NOT_SUPPORTED: Array<NodeJS.Platform> = Object.entries(
-  ARCHITECTURES_SUPPORTED
+  ARCHITECTURES_SUPPORTED,
 )
   .filter(([, architectures]) => architectures.length <= 0)
   .map(([platform]) => platform as NodeJS.Platform);

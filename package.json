@@ -2,7 +2,6 @@
   "name": "shellcheck",
   "version": "4.0.0",
   "private": false,
-  "type": "module",
   "description": "Wrapper to download shellcheck",
   "keywords": [
     "bash",
@@ -31,20 +30,20 @@
       "url": "https://linkedin.com/in/carlo-corradini"
     }
   ],
+  "type": "module",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
   "bin": {
     "shellcheck": "./bin/shellcheck.js"
   },
-  "main": "./build/index.js",
-  "types": "./build/index.d.ts",
   "files": [
     "./bin",
     "./build"
   ],
-  "engines": {
-    "node": ">=20.9.0"
-  },
   "scripts": {
+    "prebuild": "npm run clean",
     "build": "npx tsc --build tsconfig.json",
+    "postbuild": "npx shx chmod -R 755 ./bin",
     "check": "npx npm-run-all --npm-path npm check:*",
     "check:format": "npx prettier --check .",
     "check:lint": "npx eslint .",
@@ -56,11 +55,16 @@
     "fix:format": "npx prettier --write .",
     "fix:lint": "npx eslint --fix .",
     "fix:markdown": "npx markdownlint --fix \"**/*.md\"",
-    "postbuild": "npx shx chmod -R 755 ./bin",
-    "prebuild": "npm run clean",
     "prepare": "npx ts-patch install -s && npx husky install",
     "prepublishOnly": "npm run build",
     "test": "npx vitest run --coverage"
+  },
+  "dependencies": {
+    "@felipecrs/decompress-tarxz": "5.0.4",
+    "@xhmikosr/decompress-unzip": "7.1.0",
+    "decompress": "4.2.1",
+    "envalid": "8.1.0",
+    "global-agent": "3.0.0"
   },
   "devDependencies": {
     "@cspell/dict-en_us": "4.3.21",
@@ -89,7 +93,8 @@
     "markdownlint": "0.34.0",
     "markdownlint-cli": "0.41.0",
     "npm-run-all": "4.1.5",
-    "prettier": "3.3.1",
+    "prettier": "3.6.2",
+    "prettier-plugin-packagejson": "2.5.19",
     "shx": "0.3.4",
     "ts-patch": "3.2.0",
     "tsconfig-paths": "4.2.0",
@@ -98,12 +103,8 @@
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "3.2.4"
   },
-  "dependencies": {
-    "@felipecrs/decompress-tarxz": "5.0.4",
-    "@xhmikosr/decompress-unzip": "7.1.0",
-    "decompress": "4.2.1",
-    "envalid": "8.1.0",
-    "global-agent": "3.0.0"
+  "engines": {
+    "node": ">=20.9.0"
   },
   "publishConfig": {
     "access": "public",

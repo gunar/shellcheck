@@ -22,5 +22,5 @@ export const enum LoggerLevel {
   /**
    * Error level.
    */
-  ERROR = 'error'
+  ERROR = 'error',
 }

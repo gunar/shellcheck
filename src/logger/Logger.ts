@@ -14,7 +14,7 @@ export class Logger {
     debug: 1,
     info: 2,
     warn: 3,
-    error: 4
+    error: 4,
   };
 
   /**

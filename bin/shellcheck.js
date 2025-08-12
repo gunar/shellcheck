@@ -4,18 +4,18 @@
 import { shellcheck } from '../build/shellcheck.js';
 
 shellcheck({ stdio: 'inherit' })
-  .then((shellcheck) => {
+  .then(result => {
     // Check error
-    if (shellcheck.error) throw shellcheck.error;
+    if (result.error) throw result.error;
 
     // Print stdout
-    if (shellcheck.stdout) process.stdout.write(shellcheck.stdout);
+    if (result.stdout) process.stdout.write(result.stdout);
     // Print stderr
-    if (shellcheck.stderr) process.stderr.write(shellcheck.stderr);
+    if (result.stderr) process.stderr.write(result.stderr);
 
     // Exit
-    process.exit(shellcheck.status ?? 1);
+    process.exit(result.status ?? 1);
   })
-  .catch((err) => {
+  .catch(err => {
     throw err;
   });

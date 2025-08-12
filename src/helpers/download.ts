@@ -72,20 +72,20 @@ export async function download(args: DownloadArgs): Promise<void> {
     await requestDownload({
       url: downloadURL,
       token: args.token,
-      destination: archive
+      destination: archive,
     });
 
     // Extract
     logger.info(`Extracting '${archive}' to '${path.dirname(shellcheck)}'`);
     await decompress(archive, path.dirname(shellcheck), {
       strip: 1,
-      filter: (file) => file.path === binArchive,
-      plugins: [decompressTarXz(), decompressUnzip()]
+      filter: file => file.path === binArchive,
+      plugins: [decompressTarXz(), decompressUnzip()],
     });
 
     // Permissions
     logger.debug(
-      `Changing permissions '${config.mode.toString(8)}' of '${shellcheck}'`
+      `Changing permissions '${config.mode.toString(8)}' of '${shellcheck}'`,
     );
     await fs.chmod(shellcheck, config.mode);
 

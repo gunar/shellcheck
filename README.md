@@ -57,10 +57,10 @@ import { shellcheck, download, config } from 'shellcheck';
  * Download ShellCheck if not found or invalid.
  */
 await shellcheck({
-  args: ['path/to/script.sh', 'path/to/another/script.sh']
+  args: ['path/to/script.sh', 'path/to/another/script.sh'],
   // Options...
 })
-  .then((result) => {
+  .then(result => {
     // Check error
     if (result.error) throw result.error;
 
@@ -72,7 +72,7 @@ await shellcheck({
     // Exit code
     if (result?.status !== 0) throw new Error(`Exit code: ${result?.status}`);
   })
-  .catch((err) => {
+  .catch(err => {
     console.error(`Error: ${err}`);
     throw err;
   });
@@ -81,7 +81,7 @@ await shellcheck({
  * Download ShellCheck.
  */
 await download({
-  destination: `path/to/destination/shellcheck`
+  destination: `path/to/destination/shellcheck`,
   // destination: `path\\to\\destination\\shellcheck.exe` // Windows
   // Options...
 });
