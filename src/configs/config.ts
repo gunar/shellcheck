@@ -89,6 +89,7 @@ export const config: Config = {
       architectures: [
         ['x64', 'x86_64'],
         ['arm64', 'aarch64'],
+        ['riscv64', 'riscv64'],
       ],
     },
     darwin: {
